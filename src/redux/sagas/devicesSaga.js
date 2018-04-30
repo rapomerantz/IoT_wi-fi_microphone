@@ -4,6 +4,7 @@ import axios from 'axios';
 function* devicesSaga() {
     yield takeEvery ('FETCH_DEVICES', fetchDevicesSaga); 
     yield takeEvery ('ADD_DEVICE', addDeviceSaga); 
+    yield takeEvery ('FETCH_SPL', fetchSplSaga);
 }
 
 
@@ -32,5 +33,27 @@ function* addDeviceSaga(action) {
         console.log('error in addDeviceSaga', error);           
     }
 }
+
+
+
+function* fetchSplSaga(action) {
+    console.log('in fetchSplSaga', action);
+    try {
+        const splResponse = yield call(axios.get, `/api/spl/?quantity=${action.payload}`) //<-- action.payload is number of spl data to be returned
+        yield put({
+            type: 'SET_SPL',
+            payload: splResponse.data
+        });
+    } catch (error) {
+        console.log('error in fetchSpl Saga', error);
+        
+    }
+    
+}
+
+
+
+
+
 
 export default devicesSaga; 

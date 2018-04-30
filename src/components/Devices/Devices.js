@@ -33,7 +33,6 @@ class Devices extends Component {
     this.props.dispatch({
       type: 'FETCH_DEVICES'
     });
-    
   }
 
 
