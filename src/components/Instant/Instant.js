@@ -61,7 +61,6 @@ class Instant extends Component {
     let newSpl = this.props.state.splReducer.splReducer.map((item) => {
       return <p key={item.id}>{item.spl}</p>
     })
-    console.log('newSpl', newSpl);
     
 
     return (
