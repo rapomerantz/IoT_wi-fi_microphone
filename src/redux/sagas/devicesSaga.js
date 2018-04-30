@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function* devicesSaga() {
     yield takeEvery ('FETCH_DEVICES', fetchDevicesSaga); 
+    yield takeEvery ('ADD_DEVICE', addDeviceSaga); 
 }
 
 
@@ -18,6 +19,17 @@ function* fetchDevicesSaga(action) {
         });
     } catch (error) {
         console.log('error in fetchDevicesSaga', error);           
+    }
+}
+
+//send POST request to server
+function* addDeviceSaga(action) {
+    console.log('in addDeviceSaga');
+    try {
+        yield call (axios.post, '/api/devices', action.payload); 
+        yield put ({type: 'FETCH_DEVICES'});  //<-- triggers GET in fetchDevicesSaga above
+    } catch (error) {
+        console.log('error in addDeviceSaga', error);           
     }
 }
 

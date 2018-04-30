@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { Paper, Button } from 'material-ui';
 import './Devices.css'
+import Icon from 'material-ui/Icon';
 
 //connect to redux
 const mapStateToProps = state => ({
@@ -17,11 +18,12 @@ class DevicesItem extends Component {
       <div>
         <Paper>
             <Paper className="devicePaper">
-              <h3>Device Name: {this.props.device.device_name}</h3>
+              <p>Device Name: {this.props.device.device_name}</p>
             <Button color="primary">Edit</Button>
             <Button color="primary">Instant View</Button>
             <Button color="primary">Graph View</Button>
-            <Button color="secondary">Delete</Button>
+            <Button color="secondary"><Icon>delete</Icon></Button>
+            
             </Paper>
         </Paper>
       </div>

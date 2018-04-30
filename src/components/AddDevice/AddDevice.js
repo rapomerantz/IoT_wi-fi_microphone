@@ -12,6 +12,17 @@ const mapStateToProps = state => ({
 });
 
 class AddDevice extends Component {
+  constructor(props) {
+    super(props) 
+    this.state = {
+      deviceName: '',
+      deviceId: '',
+      authToken: '', 
+    }
+  }
+
+
+
 //fetch user info
   componentDidMount() {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
@@ -24,6 +35,29 @@ class AddDevice extends Component {
     }
   }
 
+//currying function to setState on change of input fields
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    })    
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    //pass this.state to addDeviceSaga    
+    this.props.dispatch({ 
+      type:'ADD_DEVICE',
+      payload: this.state
+    })
+    //reset input fields
+    this.setState({     
+      deviceName: '',
+      deviceId: '',
+      authToken: '', 
+    })
+  }
+
+
   render() {
 
     return (
@@ -32,18 +66,31 @@ class AddDevice extends Component {
         <Paper>
           <h1>Add Device</h1>
           <Paper className="inputs">
+
             <form>
+
               <TextField className="inputField"
                           id="deviceName"
-                          label="Device Name"/>
+                          label="Device Name"
+                          name="deviceName"
+                          value={this.state.deviceName}
+                          onChange={this.handleChange}/>
               <TextField className="inputField"
                           id="deviceId"
-                          label="Device Id"/>
+                          label="Device Id"
+                          name="deviceId"
+                          value={this.state.deviceId}
+                          onChange={this.handleChange}/>
               <TextField className="inputField"
                           id="deviceAuth"
-                          label="Authorization Token"/>
-              <Button color="primary">Submit</Button>
+                          label="Authorization Token"
+                          name="authToken"
+                          value={this.state.authToken}
+                          onChange={this.handleChange}/>
+              <Button onClick={this.handleSubmit} color="primary">Submit</Button>
+
             </form>
+
           </Paper>
 
         </Paper>
