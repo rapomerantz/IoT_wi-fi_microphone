@@ -26,7 +26,7 @@ const App = () => (
     <Header title="Project Base" />
     <Router>
       <Switch>
-        <Redirect exact from="/" to="/home" />
+        <Redirect exact from="/" to="/user" />
         <Route
           path="/home"
           component={LoginPage}

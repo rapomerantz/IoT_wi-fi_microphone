@@ -1,0 +1,32 @@
+#instantContainer {
+    margin-bottom: 40px; 
+}
+#instantContent {
+    padding: 40px; 
+    width: 80%; 
+    margin-left: 5%; 
+}
+
+.instantWire {
+    background-color: whitesmoke; 
+    border: 1px grey solid; 
+    height: 200px;
+    width: 200px; 
+    /* margin-left: 75px; */
+}
+
+.warningWire {
+    background-color: cornsilk; 
+    border: 1px grey solid; 
+    height: 50px;
+    width: 200px; 
+    /* margin-left: 75px; */
+}
+
+.buttonWire {
+    background-color: forestgreen; 
+    border: 1px grey solid; 
+    height: 50px;
+    width: 200px; 
+    /* margin-left: 100px; */
+}

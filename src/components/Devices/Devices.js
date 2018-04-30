@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import { Paper, Button } from 'material-ui';
+import './Devices.css'
 
 //connect to redux
 const mapStateToProps = state => ({
@@ -27,7 +29,28 @@ class Devices extends Component {
     return (
       <div>
         <Nav />
+        <Paper>
         <h1>Devices</h1>
+        <Paper className="devicePaper">
+           DEVICE 1
+          <Button color="primary">Edit</Button>
+          <Button color="primary">Instant View</Button>
+          <Button color="primary">Graph View</Button>
+          <Button color="secondary">Delete</Button>
+        </Paper>
+        <Paper className="devicePaper">
+           DEVICE 2
+          <Button color="primary">Edit</Button>
+          <Button color="primary">Instant View</Button>
+          <Button color="primary">Graph View</Button>
+          <Button color="secondary">Delete</Button>
+        </Paper>
+
+
+        </Paper>
+
+
+
       </div>
     );
   }

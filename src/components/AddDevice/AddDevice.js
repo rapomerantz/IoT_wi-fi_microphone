@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import { Paper, Button, TextField } from 'material-ui';
+import './AddDevice.css'
 
 //connect to redux
 const mapStateToProps = state => ({
@@ -27,7 +29,24 @@ class AddDevice extends Component {
     return (
       <div>
         <Nav />
-        <h1>Add Device</h1>
+        <Paper>
+          <h1>Add Device</h1>
+          <Paper className="inputs">
+            <form>
+              <TextField className="inputField"
+                          id="deviceName"
+                          label="Device Name"/>
+              <TextField className="inputField"
+                          id="deviceId"
+                          label="Device Id"/>
+              <TextField className="inputField"
+                          id="deviceAuth"
+                          label="Authorization Token"/>
+              <Button color="primary">Submit</Button>
+            </form>
+          </Paper>
+
+        </Paper>
       </div>
     );
   }

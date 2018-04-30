@@ -11,18 +11,19 @@ const Nav = () => (
           </Link>
         </li>
         <li>
-          <Link to="/info">
-            Info Page
+          <Link to="/devices">
+            Devices
           </Link>
         </li>
+
         <li>
           <Link to="/addDevice">
             Add
           </Link>
         </li>
         <li>
-          <Link to="/devices">
-            Devices
+          <Link to="/instant">
+            Instant
           </Link>
         </li>
         <li>
@@ -31,8 +32,8 @@ const Nav = () => (
           </Link>
         </li>
         <li>
-          <Link to="/instant">
-            Instant
+          <Link to="/info">
+            Info Page
           </Link>
         </li>
       </ul>

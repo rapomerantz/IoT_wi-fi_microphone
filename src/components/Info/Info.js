@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import { Paper, Button } from 'material-ui';
+import './Info.css'
 
 const mapStateToProps = state => ({
-  user: state.user,
+  state
 });
 
 class InfoPage extends Component {
@@ -13,32 +15,25 @@ class InfoPage extends Component {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
   }
 
-  componentDidUpdate() {
-    if (!this.props.user.isLoading && this.props.user.userName === null) {
-      this.props.history.push('home');
-    }
+//check user - boot unauthorized user
+componentDidUpdate() {
+  if (!this.props.state.user.isLoading && this.props.state.user.userName === null) {
+    this.props.history.push('home');
   }
+}
 
-  render() {
-    let content = null;
+render() {
 
-    if (this.props.user.userName) {
-      content = (
-        <div>
-          <p>
-            Info Page
-          </p>
-        </div>
-      );
-    }
-
-    return (
-      <div>
-        <Nav />
-        { content }
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Nav />
+      <Paper id="infoContainer">
+        <h1>Info</h1>
+        <p>A nice info page will live here :) </p>
+      </Paper>
+    </div>
+  );
+}
 }
 
 // this allows us to use <App /> in index.js
