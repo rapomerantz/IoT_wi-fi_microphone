@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import InstantMenu from './InstantMenu.js'
-import { Button, Card, Menu, MenuItem } from 'material-ui';
+// import InstantMenu from './InstantMenu.js'
+import { Button, Card, Menu, MenuItem, FormControl, InputLabel, Select } from 'material-ui';
 import './Instant.css'
 
 //connect to redux
@@ -17,6 +17,7 @@ class Instant extends Component {
       super(props) 
       this.state = {
           anchorEl: null,
+          selectedDevice: 'Device' 
       };
     }
 
@@ -40,8 +41,13 @@ class Instant extends Component {
     this.setState({ anchorEl: event.currentTarget });
   };
 
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+
   render() {
-    const { anchorEl } = this.state;
 
 
     return (
@@ -49,17 +55,21 @@ class Instant extends Component {
         <Nav />
         <div id="instantContainer">
           <h1>Instant</h1>
-          <Menu id="deviceSelect"
-                anchorEl = {anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={this.closeMenu}>
-              <MenuItem onClick={this.handleClose}>Device</MenuItem>
-              <MenuItem onClick={this.handleClose}>Device</MenuItem>
-              <MenuItem onClick={this.handleClose}>Device</MenuItem>
-          </Menu>
           <Card id="instantContent">
-            {/* Anchor Element for Menu */}
-            <Button variant="raised" color="primary" className="buttonWire" onClick={this.openMenu}> Select Device </Button>
+
+          
+          
+          <FormControl>
+            <InputLabel>Select Device</InputLabel>
+              <Select
+                value={this.state.selectedDevice}
+                onChange={this.handleChange}>
+                  <MenuItem value={this.state.selectedDevice}><em>Select Device</em></MenuItem>
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+          </FormControl>
 
             <div className="instantWire"></div>
             <div className="warningWire"></div>
