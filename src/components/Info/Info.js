@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { Paper, Button } from 'material-ui';
+import { Paper } from 'material-ui';
 import './Info.css'
 
 const mapStateToProps = state => ({

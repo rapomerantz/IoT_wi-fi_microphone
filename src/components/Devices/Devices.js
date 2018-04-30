@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios'; 
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { Paper, Button } from 'material-ui';
+import { Paper } from 'material-ui';
+import DevicesItem from './DevicesItem.js'
 import './Devices.css'
 
 //connect to redux
@@ -17,6 +17,7 @@ class Devices extends Component {
   componentDidMount() {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
     this.fetchDevices(); 
+
   }
 
 //check user - boot unauthorized user
@@ -26,40 +27,35 @@ class Devices extends Component {
     }
   }
 
+//triggers fetchDevicesSaga, stores devices on this.props.state.devicesReducer
   fetchDevices = () => {
     console.log('fetching devices');
     this.props.dispatch({
       type: 'FETCH_DEVICES'
     });
     
-
   }
 
 
 
   render() {
+    console.log(this.props.state.devicesReducer.devicesReducer);
+    let devicesReducer = this.props.state.devicesReducer.devicesReducer; 
+
+    let devicesItemArray = devicesReducer.map((device) => {
+      return <DevicesItem key={device.id}
+                          device={device}/>
+    })
+    
+
+
 
     return (
       <div>
         <Nav />
         <Paper>
         <h1>Devices</h1>
-        <Paper className="devicePaper">
-           DEVICE 1
-          <Button color="primary">Edit</Button>
-          <Button color="primary">Instant View</Button>
-          <Button color="primary">Graph View</Button>
-          <Button color="secondary">Delete</Button>
-        </Paper>
-        <Paper className="devicePaper">
-           DEVICE 2
-          <Button color="primary">Edit</Button>
-          <Button color="primary">Instant View</Button>
-          <Button color="primary">Graph View</Button>
-          <Button color="secondary">Delete</Button>
-        </Paper>
-
-
+          {devicesItemArray}
         </Paper>
 
 

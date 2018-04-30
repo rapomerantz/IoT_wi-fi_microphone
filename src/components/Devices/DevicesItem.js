@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
     state
 });
 
-class Devices extends Component {
+class DevicesItem extends Component {
 
   render() {
 
@@ -17,7 +17,7 @@ class Devices extends Component {
       <div>
         <Paper>
             <Paper className="devicePaper">
-            DEVICE 1
+              <h3>Device Name: {this.props.device.device_name}</h3>
             <Button color="primary">Edit</Button>
             <Button color="primary">Instant View</Button>
             <Button color="primary">Graph View</Button>
@@ -30,4 +30,4 @@ class Devices extends Component {
 }
 
 // allows us to use <App /> in index.js
-export default connect(mapStateToProps)(Devices);
+export default connect(mapStateToProps)(DevicesItem);

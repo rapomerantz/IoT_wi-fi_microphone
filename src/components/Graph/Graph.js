@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { Paper, Button, Card, CardContent, Menu, MenuItem } from 'material-ui';
+import { Button, Card, Menu, MenuItem } from 'material-ui';
 import './Graph.css'
 
 //connect to redux
