@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+import InstantMenu from './InstantMenu.js'
 import { Button, Card, Menu, MenuItem } from 'material-ui';
 import './Instant.css'
 
