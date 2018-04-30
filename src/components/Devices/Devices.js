@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios'; 
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
@@ -15,6 +16,7 @@ class Devices extends Component {
 //fetch user info
   componentDidMount() {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
+    this.fetchDevices(); 
   }
 
 //check user - boot unauthorized user
@@ -23,6 +25,17 @@ class Devices extends Component {
       this.props.history.push('home');
     }
   }
+
+  fetchDevices = () => {
+    console.log('fetching devices');
+    this.props.dispatch({
+      type: 'FETCH_DEVICES'
+    });
+    
+
+  }
+
+
 
   render() {
 
