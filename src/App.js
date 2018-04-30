@@ -6,11 +6,18 @@ import {
   Switch,
 } from 'react-router-dom';
 
+//login&static views
 import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
-import InfoPage from './components/InfoPage/InfoPage';
+
+//functional views
+import Info from './components/Info/Info';
+import AddDevice from './components/AddDevice/AddDevice';
+import Devices from './components/Devices/Devices';
+import Graph from './components/Graph/Graph';
+import Instant from './components/Instant/Instant';
 
 import './styles/main.css';
 
@@ -34,7 +41,23 @@ const App = () => (
         />
         <Route
           path="/info"
-          component={InfoPage}
+          component={Info}
+        />
+        <Route
+          path="/addDevice"
+          component={AddDevice}
+        />
+        <Route
+          path="/devices"
+          component={Devices}
+        />
+        <Route
+          path="/graph"
+          component={Graph}
+        />
+        <Route
+          path="/instant"
+          component={Instant}
         />
         {/* OTHERWISE (no path!) */}
         <Route render={() => <h1>404</h1>} />

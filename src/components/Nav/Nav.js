@@ -15,6 +15,26 @@ const Nav = () => (
             Info Page
           </Link>
         </li>
+        <li>
+          <Link to="/addDevice">
+            Add
+          </Link>
+        </li>
+        <li>
+          <Link to="/devices">
+            Devices
+          </Link>
+        </li>
+        <li>
+          <Link to="/graph">
+            Graph
+          </Link>
+        </li>
+        <li>
+          <Link to="/instant">
+            Instant
+          </Link>
+        </li>
       </ul>
     </div>
   </div>
