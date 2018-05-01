@@ -12,6 +12,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const devicesRouter = require('./routes/devices.router')
 const splRouter = require('./routes/spl.router')
+const cronQuery = require('./modules/photonNodeCron')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +32,9 @@ app.use('/api/spl', splRouter);
 
 // Serve static files
 app.use(express.static('build'));
+
+//use NodeCron 
+app.use('/', cronQuery); 
 
 // App Set //
 const PORT = process.env.PORT || 5000;

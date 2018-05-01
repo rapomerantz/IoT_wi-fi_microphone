@@ -1,6 +1,3 @@
-import { combineReducers } from 'redux';
-
-
 const splReducer = (state=[], action) => {
     switch(action.type) {
         case 'SET_SPL':
@@ -9,7 +6,4 @@ const splReducer = (state=[], action) => {
             return state
     }
 }
-
-export default combineReducers ({
-    splReducer
-})
+export default splReducer;

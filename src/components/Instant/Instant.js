@@ -16,15 +16,19 @@ class Instant extends Component {
     constructor(props) {
       super(props) 
       this.state = {
+          timer: null,
+          counter: 0,
           selectedDevice: '1' 
       };
     }
 
 //fetch user info
   componentDidMount() {
+    this.fetchSpl(); 
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
     this.fetchDevices(); 
-    this.fetchSpl(); 
+    let timer = setInterval(this.tick, 5000);  //<-- setting interval for reset timer (5 seconds)
+    this.setState({timer});
   }
 
 //check user - boot unauthorized user
@@ -33,6 +37,22 @@ class Instant extends Component {
       this.props.history.push('home');
     }
   }
+
+  componentWillUnmount () {
+    this.clearInterval(this.state.timer); //<-- clear timer interval on unmount
+  }
+
+
+//function to run every 5 seconds (update spl)
+  tick = () => {
+    this.setState({
+      counter: this.state.counter +1
+    });
+    this.fetchSpl(); 
+    // console.log('tick')
+  }
+
+
 //GET devices from db
   fetchDevices = () => {
     console.log('fetching devices');
@@ -57,10 +77,34 @@ class Instant extends Component {
 
 
   render() {
-    //picking out spl reading from splReducer state in redux
-    let newSpl = this.props.state.splReducer.splReducer.map((item) => {
-      return <p key={item.id}>{item.spl}</p>
-    })
+    let newSpl = this.props.state.splReducer[0] && //<-- 'does this value exist?'
+                  this.props.state.splReducer[0].spl; //<-- 'if yes, this is the value of newSpl'
+    console.log(newSpl)
+
+
+    
+    
+//Changing color/contents of warning <div> based on most recent SPL data
+    let warningClassName = '';
+    let warningMessage = '';
+    if (newSpl <= 60) {
+      warningClassName = 'warningGreen';
+      warningMessage = 'It\'s not too loud in here, you should be fine'; 
+    }
+    else if(newSpl > 60 && newSpl < 80) {
+      warningClassName = 'warningYellow';
+      warningMessage = 'Caution: you are approching the threshold for hearing damage'
+    }
+    else if (newSpl >= 80) {
+      warningClassName = 'warningRed';
+      warningMessage = 'It\'s really loud in here, you should probably be wearing earplugs'
+    }
+    else {
+      warningClassName = 'warningGreen'; 
+      warningMessage = 'It\'s not too loud in here, you should be fine'; 
+    }
+//End change color/content
+
     
 
     return (
@@ -87,7 +131,9 @@ class Instant extends Component {
             {newSpl}
             </div>
 
-            <div className="warningWire"></div>
+            <div className={warningClassName}>
+            <em>{warningMessage}</em>
+            </div>
               {/* link to graph view */}
             <Button variant="raised" color="primary" className="buttonWire">See Graph</Button>
 
