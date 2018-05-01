@@ -37,9 +37,9 @@ function* addDeviceSaga(action) {
 
 
 function* fetchSplSaga(action) {
-    console.log('in fetchSplSaga', action);
-    try {
-        const splResponse = yield call(axios.get, `/api/spl/?quantity=${action.payload}`) //<-- action.payload is number of spl data to be returned
+    console.log('in fetchSplSaga', action.payload.selectedDevice);
+    try {                                                           //action.payload is number of spl data to be returned
+        const splResponse = yield call(axios.get, `/api/spl/?quantity=${action.payload.quantity}&device=${action.payload.selectedDevice}`) 
         yield put({
             type: 'SET_SPL',
             payload: splResponse.data

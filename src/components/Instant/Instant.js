@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { Button, Card, MenuItem, FormControl, InputLabel, Select } from 'material-ui';
-//import Select from 'react-select';
+import { Button, Card, MenuItem, FormControl, InputLabel, Select } from 'material-ui'; 
+import InstantSelectOption from './InstantSelectOption.js'
+import InstantWarning from './InstantWarning.js'
 import './Instant.css'
 
 //connect to redux
@@ -18,15 +19,15 @@ class Instant extends Component {
       this.state = {
           timer: null,
           counter: 0,
-          selectedDevice: '1' 
+          selectedDevice: '3a0027001647343339383037',
       };
     }
 
 //fetch user info
   componentDidMount() {
-    this.fetchSpl(); 
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
     this.fetchDevices(); 
+    this.fetchSpl(); 
     let timer = setInterval(this.tick, 5000);  //<-- setting interval for reset timer (5 seconds)
     this.setState({timer});
   }
@@ -43,7 +44,6 @@ class Instant extends Component {
 //   this.setState({timer}); 
   }
 
-
 //function to run every 5 seconds (update spl)
   tick = () => {
     this.setState({
@@ -52,7 +52,6 @@ class Instant extends Component {
     this.fetchSpl(); 
     // console.log('tick')
   }
-
 
 //GET devices from db
   fetchDevices = () => {
@@ -71,42 +70,34 @@ class Instant extends Component {
     console.log('in fetchSpl');
     this.props.dispatch({
       type:'FETCH_SPL',
-      payload: 1
+      payload: {
+        quantity: 1,
+        selectedDevice: this.state.selectedDevice
+      }
     })    
   }
 
-
+  handleSelect = (event) => {
+    console.log('select value: ',event.target.value);
+    this.setState({
+      selectedDevice: event.target.value
+    });    
+    this.fetchSpl(); 
+  }
 
   render() {
+
+//looping through devices & returning <option> elemnts to populate <select>
+    let selectItemsArray = this.props.state.devicesReducer.devicesReducer && this.props.state.devicesReducer.devicesReducer; 
+    let selectOptions = selectItemsArray.map((element) => {
+        return <InstantSelectOption key={element.device_id}
+                                     element={element}/>
+    })
+
+//Defining newSpl upon render
     let newSpl = this.props.state.splReducer[0] && //<-- 'does this value exist?'
                   this.props.state.splReducer[0].spl; //<-- 'if yes, this is the value of newSpl'
     console.log(newSpl)
-
-
-    
-    
-//Changing color/contents of warning <div> based on most recent SPL data
-    let warningClassName = '';
-    let warningMessage = '';
-    if (newSpl <= 60) {
-      warningClassName = 'warningGreen';
-      warningMessage = 'It\'s not too loud in here, you should be fine'; 
-    }
-    else if(newSpl > 60 && newSpl < 80) {
-      warningClassName = 'warningYellow';
-      warningMessage = 'Caution: you are approching the threshold for hearing damage'
-    }
-    else if (newSpl >= 80) {
-      warningClassName = 'warningRed';
-      warningMessage = 'It\'s really loud in here, you should probably be wearing earplugs'
-    }
-    else {
-      warningClassName = 'warningGreen'; 
-      warningMessage = 'It\'s not too loud in here, you should be fine'; 
-    }
-//End change color/content
-
-    
 
     return (
       <div>
@@ -115,7 +106,11 @@ class Instant extends Component {
           <h1>Instant</h1>
           <Card id="instantContent">
 
-          <FormControl>
+          <select onChange={this.handleSelect}>
+            {selectOptions}
+          </select>
+
+          {/* <FormControl>
             <InputLabel>Select Device</InputLabel>
               <Select
                 value={this.state.selectedDevice}
@@ -126,15 +121,15 @@ class Instant extends Component {
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
               </Select>
-          </FormControl>
+          </FormControl> */}
 
+            <p>selected device: {this.state.selectedDevice}</p>
             <div className="instantWire">
               {newSpl}
             </div>
 
-            <div className={warningClassName}>
-            <em>{warningMessage}</em>
-            </div>
+            <InstantWarning newSpl={newSpl}/>
+
               {/* link to graph view */}
             <Button variant="raised" color="primary" className="buttonWire">See Graph</Button>
 
