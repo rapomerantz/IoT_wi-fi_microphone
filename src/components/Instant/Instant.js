@@ -44,13 +44,13 @@ class Instant extends Component {
 
 
 //function to run every 5 seconds (update spl)
-  tick = () => {
-    this.setState({
-      counter: this.state.counter +1
-    });
-    this.fetchSpl(); 
-    // console.log('tick')
-  }
+  // tick = () => {
+  //   this.setState({
+  //     counter: this.state.counter +1
+  //   });
+  //   this.fetchSpl(); 
+  //   // console.log('tick')
+  // }
 
 
 //GET devices from db
