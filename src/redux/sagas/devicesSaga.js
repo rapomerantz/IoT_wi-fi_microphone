@@ -46,9 +46,7 @@ function* fetchSplSaga(action) {
         });
     } catch (error) {
         console.log('error in fetchSpl Saga', error);
-        
     }
-    
 }
 
 

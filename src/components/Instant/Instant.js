@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-// import InstantMenu from './InstantMenu.js'
 import { Button, Card, MenuItem, FormControl, InputLabel, Select } from 'material-ui';
+//import Select from 'react-select';
 import './Instant.css'
 
 //connect to redux
@@ -39,18 +39,19 @@ class Instant extends Component {
   }
 
   componentWillUnmount () {
-    this.clearInterval(this.state.timer); //<-- clear timer interval on unmount
+//   let timer = setInterval(0); //<-- clear timer interval on unmount
+//   this.setState({timer}); 
   }
 
 
 //function to run every 5 seconds (update spl)
-  // tick = () => {
-  //   this.setState({
-  //     counter: this.state.counter +1
-  //   });
-  //   this.fetchSpl(); 
-  //   // console.log('tick')
-  // }
+  tick = () => {
+    this.setState({
+      counter: this.state.counter +1
+    });
+    this.fetchSpl(); 
+    // console.log('tick')
+  }
 
 
 //GET devices from db
@@ -128,7 +129,7 @@ class Instant extends Component {
           </FormControl>
 
             <div className="instantWire">
-            {newSpl}
+              {newSpl}
             </div>
 
             <div className={warningClassName}>
