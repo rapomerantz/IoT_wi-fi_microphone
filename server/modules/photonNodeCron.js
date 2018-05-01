@@ -18,8 +18,8 @@ new CronJob('*/10 * * * * *', function() {
         console.log('Device ID: ', response.data.coreInfo.deviceID);
         //query to be sent to SQL db
 
-    let queryText = `INSERT INTO spl_data (person_device_id, spl, stamp) 
-                    VALUES ('2', '${response.data.result}', '${timestamp}');`
+    let queryText = `INSERT INTO spl_data (device_id, spl, stamp) 
+                    VALUES ('${response.data.coreInfo.deviceID}', '${response.data.result}', '${timestamp}');`
         pool.query(queryText)
             .then((result) => {
                 console.log('successful post to db');

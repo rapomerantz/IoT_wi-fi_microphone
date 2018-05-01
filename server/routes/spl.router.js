@@ -8,9 +8,11 @@ const router = express.Router();
 router.get('/', (req, res) => {
     console.log('in GET /api/spl, rec.query.quantity:', req.query.quantity);
     let quantity = req.query.quantity;
-    const queryText = `SELECT * FROM spl_data 
-                        JOIN person_device ON person_device.id = spl_data.person_device_id 
-                        WHERE person_device_id = 2 
+
+    //device id goes in WHERE below
+    let queryText = `SELECT spl_data.device_id, person_id, spl, stamp FROM spl_data 
+                        JOIN person_device ON person_device.device_id = spl_data.device_id 
+                        WHERE spl_data.device_id = '3a0027001647343339383037'  
                         ORDER BY stamp DESC
                         LIMIT ${quantity};`
     pool.query(queryText)
