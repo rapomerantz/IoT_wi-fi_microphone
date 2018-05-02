@@ -16,9 +16,8 @@ const mapStateToProps = state => ({
 class Instant extends Component {
     constructor(props) {
       super(props) 
+      this.timer = null;
       this.state = {
-          timer: null,
-          counter: 0,
           selectedDevice: '3a0027001647343339383037',
       };
     }
@@ -28,8 +27,7 @@ class Instant extends Component {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
     this.fetchDevices(); 
     this.fetchSpl(); 
-    let timer = setInterval(this.tick, 5000);  //<-- setting interval for reset timer (5 seconds)
-    this.setState({timer});
+    this.timer = setInterval(this.tick, 5000);  //<-- setting interval for reset timer (5 seconds)
   }
 
 //check user - boot unauthorized user
@@ -40,15 +38,11 @@ class Instant extends Component {
   }
 
   componentWillUnmount () {
-//   let timer = setInterval(0); //<-- clear timer interval on unmount
-//   this.setState({timer}); 
+    clearInterval(this.timer);
   }
 
 //function to run every 5 seconds (update spl)
   tick = () => {
-    this.setState({
-      counter: this.state.counter +1
-    });
     this.fetchSpl(); 
     // console.log('tick')
   }
@@ -129,12 +123,9 @@ class Instant extends Component {
             </div>
 
             <InstantWarning newSpl={newSpl}/>
-
               {/* link to graph view */}
             <Button variant="raised" color="primary" className="buttonWire">See Graph</Button>
-
           </Card>
-
         </div>
       </div>
     );

@@ -10,8 +10,8 @@
 .graphWire {
     background-color: whitesmoke; 
     border: 1px grey solid; 
-    height: 200px;
-    width: 200px; 
+    height: 500px;
+    width: 500px; 
     /* margin-left: 75px; */
 }
 
@@ -19,7 +19,7 @@
     background-color: cornsilk; 
     border: 1px grey solid; 
     height: 50px;
-    width: 200px; 
+    width: 250px; 
     /* margin-left: 75px; */
 }
 
