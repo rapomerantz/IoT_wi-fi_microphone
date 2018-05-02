@@ -14,9 +14,10 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { Button, Card, Menu, MenuItem } from 'material-ui';
+import { Button, Card, Menu, MenuItem, Switch, FormControlLabel } from 'material-ui';
 import './Graph.css'
 import moment from 'moment'
+import Chart from './Chart.js'
 
 var LineChart = require("react-chartjs").Line;
 
@@ -29,9 +30,11 @@ const mapStateToProps = state => ({
 class Graph extends Component {
     constructor(props) {
       super(props) 
+      this.timer = null;
       this.state = {
         selectedDevice: '3a0027001647343339383037',
-        timeSelection: 30
+        timeSelection: 6,
+        switch: true,
       };
     }
 
@@ -40,6 +43,7 @@ class Graph extends Component {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
     this.fetchDevices();
     this.fetchSpl(); 
+    this.timer = setInterval(this.tick, 2500);  //<-- setting interval for reset timer (2.5 seconds)
   }
 //check user - boot unauthorized user
   componentDidUpdate() {
@@ -48,6 +52,13 @@ class Graph extends Component {
     }
   }
 
+//function to run every 2.5 seconds (update spl) IF switch is on
+tick = () => {
+  if (this.state.switch) {
+    this.fetchSpl(); 
+  }
+}
+
 //GET devices from db
 fetchDevices = () => {
   console.log('fetching devices');
@@ -55,7 +66,6 @@ fetchDevices = () => {
     type: 'FETCH_DEVICES'
   });
 }
-
 
 //GET most recent SPL data from db
 fetchSpl = () => {
@@ -69,7 +79,7 @@ fetchSpl = () => {
   })
 }
 
-
+//set query parameter in FETCHSPL to controll amout of data to be shown in chart
 handleTimeSelect = (event) => {
   console.log('select time value: ',event.target.value);
   this.setState({
@@ -78,11 +88,10 @@ handleTimeSelect = (event) => {
   this.fetchSpl(); 
 }
 
-
-
-
-
-
+//switch toggles auto update 
+handleSwitch = name => event => {
+  this.setState({ [name]: event.target.checked });  
+};
 
 //START Menu handlers
   closeDeviceMenu = () => {
@@ -102,36 +111,6 @@ handleTimeSelect = (event) => {
   render() {
     // const { anchorElDevice } = this.state;
     // const { anchorElTime } = this.state;
-
-//breaking apart splReducer array to use for chart data
-    let splReducer = this.props.state.splReducer;
-    let splStampMap = splReducer.map((item) => {
-        let formatedStamp = moment(item.stamp).format('h:mm:ss');
-        return formatedStamp;   
-    })
-    let splDataMap = splReducer.map((item) => {
-        return item.spl; 
-    })
-    console.log('splTimeMap', splStampMap);
-    console.log('splDataMap', splDataMap);
-
-//data for chart
-    let chartData = {
-      labels: [],
-      datasets: [
-          {
-              label: "My First dataset",
-              fillColor: "rgba(0,0,255,0.3)",
-              strokeColor: "rgba(0,0,255,1)",
-              pointColor: "rgba(0,0,255,1)",
-              pointStrokeColor: "",
-              pointHighlightFill: "",
-              pointHighlightStroke: "",
-              data: splDataMap
-          }
-      ]
-  };
-    
 
 
 
@@ -160,35 +139,40 @@ handleTimeSelect = (event) => {
           </Menu> */}
 {/* end UI menus */}
 
+          <pre>{JSON.stringify(this.state)}</pre>
 
-          
           <Card id="graphContent">
             {/* Anchor Element for Menu */}
             {/* <Button variant="raised" color="primary" className="buttonWire" onClick={this.openDeviceMenu}> Select Device </Button>
             <Button variant="raised" color="primary" className="buttonWire" onClick={this.openTimeMenu}> Select Timeframe </Button> */}
 
-
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={this.state.switch}
+                  onChange={this.handleSwitch('switch')}
+                  value="switch"
+                />
+              }
+              label="<- Auto Update"
+              />
 
             <select onChange={this.handleTimeSelect}>
               <option value="6">1 Minute</option>
+              <option value="12">2 Minutes</option>
               <option value="30">5 Minutes</option>
               <option value="60">10 Minutes</option>
               <option value="360">1 Hour</option>
             </select>
-
+              
 
             <div className="graphWire">
-
-              <LineChart data={chartData} width="500" height="500"/>
-            
+              <Chart/>  
             </div>
 
-
             <div className="warningWire"></div>
-            
 
             <Button variant="raised" color="primary" className="buttonWire">See Instant</Button>
-
           </Card>
 
         </div>
