@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { Button, Card, MenuItem, FormControl, InputLabel, Select, Switch, FormControlLabel } from 'material-ui'; 
+import { Button, Card, MenuItem, FormControl, InputLabel, Select, Switch, FormControlLabel, Grid } from 'material-ui'; 
 import InstantSelectOption from './InstantSelectOption.js'
 import InstantWarning from './InstantWarning.js'
 import './Instant.css'
@@ -19,7 +19,7 @@ class Instant extends Component {
       this.timer = null;
       this.state = {
           selectedDevice: '3a0027001647343339383037',
-          switch: true,
+          switch: false,
       };
     }
 
@@ -100,10 +100,12 @@ handleSwitch = name => event => {
                   this.props.state.splReducer[0].spl; //<-- 'if yes, this is the value of newSpl'
 
     return (
-      <div>
         <div id="instantContainer">
-          <Card id="instantContent">
-
+          <div id="instantContent">
+          
+          <select onChange={this.handleDeviceSelect}>
+            {selectOptions}
+          </select>
 
           <FormControlLabel
             control={
@@ -113,12 +115,12 @@ handleSwitch = name => event => {
                 value="switch"
               />
             }
-            label="<- Auto Update"
+            label="Connect"
           />
 
-          <select onChange={this.handleDeviceSelect}>
-            {selectOptions}
-          </select>
+          
+
+         
 
           {/* <FormControl>
             <InputLabel>Select Device</InputLabel>
@@ -133,17 +135,18 @@ handleSwitch = name => event => {
               </Select>
           </FormControl> */}
 
-            <p>selected device: {this.state.selectedDevice}</p>
-            <div className="instantWire">
-              {newSpl}
+            <div id="instantBox">
+              <p id="instantText">{newSpl}</p>
+            </div>
+            
+            <div id="instantWarningBox">
+              <InstantWarning newSpl={newSpl}/>
             </div>
 
-            <InstantWarning newSpl={newSpl}/>
-              {/* link to graph view */}
-            <Button variant="raised" color="primary" className="buttonWire">See Graph</Button>
-          </Card>
+
+            
+          </div>
         </div>
-      </div>
     );
   }
 }

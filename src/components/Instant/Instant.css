@@ -1,5 +1,6 @@
 #instantContainer {
     margin-bottom: 40px; 
+    font-family: 'Roboto Mono', monospace;
 }
 #instantContent {
     padding: 40px; 
@@ -7,20 +8,40 @@
     margin-left: 5%; 
 }
 
-.instantWire {
-    background-color: whitesmoke; 
+#instantBox {
+    /* background-color: whitesmoke;  */
+    /* border: 1px grey solid;  */
+    /* height: 200px;
+    width: 200px;  */
+    /* text-align: center; */
+}
+
+#instantText {
+    margin-top: 30px;
+    font-size: 95px; 
+}
+
+#instantWarningBox {
+    text-align: center;
+}
+
+#instantWarningText{
+    margin-top: 15px; 
+}
+
+
+.warningGreen {
+    background-color: forestgreen; 
     border: 1px grey solid; 
-    height: 200px;
+    height: 50px;
     width: 200px; 
-    /* margin-left: 75px; */
 }
 
 .warningYellow {
     background-color: cornsilk; 
     border: 1px grey solid; 
     height: 50px;
-    width: 200px; 
-    /* margin-left: 75px; */
+    width: 200px;    
 }
 
 .warningRed {
@@ -28,21 +49,6 @@
     border: 1px grey solid; 
     height: 50px;
     width: 200px; 
-    /* margin-left: 75px; */
+    
 }
 
-.warningGreen {
-    background-color: forestgreen; 
-    border: 1px grey solid; 
-    height: 50px;
-    width: 200px; 
-    /* margin-left: 75px; */
-}
-
-.buttonWire {
-    background-color: forestgreen; 
-    border: 1px grey solid; 
-    height: 50px;
-    width: 200px; 
-    /* margin-left: 100px; */
-}

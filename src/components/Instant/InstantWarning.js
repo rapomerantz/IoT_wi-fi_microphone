@@ -20,15 +20,15 @@ render() {
     let warningMessage = '';
     if (this.props.newSpl <= 60) {
       warningClassName = 'warningGreen';
-      warningMessage = 'It\'s not too loud in here, you should be fine'; 
+      warningMessage = 'No risk.'; 
     }
     else if(this.props.newSpl > 60 && this.props.newSpl < 80) {
       warningClassName = 'warningYellow';
-      warningMessage = 'Caution: you are approching the threshold for hearing damage'
+      warningMessage = 'Moderate risk.'
     }
     else if (this.props.newSpl >= 80) {
       warningClassName = 'warningRed';
-      warningMessage = 'It\'s really loud in here, you should probably be wearing earplugs'
+      warningMessage = 'High risk.'
     }
     else {
       warningClassName = 'warningGreen'; 
@@ -38,7 +38,7 @@ render() {
 
   return (
     <div className={warningClassName}>
-        <em>{warningMessage}</em>
+        <p id="instantWarningText">{warningMessage}</p>
     </div>
   );
 }

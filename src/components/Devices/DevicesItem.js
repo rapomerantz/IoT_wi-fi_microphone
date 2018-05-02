@@ -32,7 +32,6 @@ class DevicesItem extends Component {
                 <Grid item xs={2}>
                   <div id="deviceDelete"><Button color="secondary"><Icon>delete</Icon></Button></div>
                 </Grid>
-                
             </Grid>
 
               </Paper>
