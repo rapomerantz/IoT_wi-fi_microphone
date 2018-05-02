@@ -101,9 +101,7 @@ handleSwitch = name => event => {
 
     return (
       <div>
-        <Nav />
         <div id="instantContainer">
-          <h1>Instant</h1>
           <Card id="instantContent">
 
 

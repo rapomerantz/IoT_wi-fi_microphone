@@ -136,9 +136,7 @@ handleSwitch = name => event => {
 
     return (
       <div>
-        <Nav />
         <div id="graphContainer">
-          <h1>Graph</h1>
 
 {/* start UI menus */}
           {/* <Menu id="deviceSelect"
@@ -159,9 +157,9 @@ handleSwitch = name => event => {
           </Menu> */}
 {/* end UI menus */}
 
-          <pre>{JSON.stringify(this.state)}</pre>
+          {/* <pre>{JSON.stringify(this.state)}</pre> */}
 
-          <Card id="graphContent">
+          <div id="graphContent">
             {/* Anchor Element for Menu */}
             {/* <Button variant="raised" color="primary" className="buttonWire" onClick={this.openDeviceMenu}> Select Device </Button>
             <Button variant="raised" color="primary" className="buttonWire" onClick={this.openTimeMenu}> Select Timeframe </Button> */}
@@ -194,8 +192,8 @@ handleSwitch = name => event => {
               <Chart/>  
             </div>
 
-            <Button variant="raised" color="primary" className="buttonWire">See Instant</Button>
-          </Card>
+            {/* <Button variant="raised" color="primary" className="buttonWire">See Instant</Button> */}
+          </div>
 
         </div>
       </div>

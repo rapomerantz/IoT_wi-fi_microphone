@@ -62,9 +62,7 @@ class AddDevice extends Component {
 
     return (
       <div>
-        <Nav />
         <Paper>
-          <h1>Add Device</h1>
           <Paper className="inputs">
 
             <form>

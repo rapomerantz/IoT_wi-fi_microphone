@@ -2,16 +2,15 @@
     margin-bottom: 40px; 
 }
 #graphContent {
-    padding: 40px; 
-    width: 80%; 
-    margin-left: 5%; 
+    height: 80%;
+    width: 100%; 
+    
 }
 
 .graphWire {
-    background-color: whitesmoke; 
+    /* background-color: whitesmoke; 
     border: 1px grey solid; 
-    height: 500px;
-    width: 500px; 
+    height: 400px; */
     /* margin-left: 75px; */
 }
 

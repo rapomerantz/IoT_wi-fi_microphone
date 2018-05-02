@@ -26,7 +26,6 @@ render() {
 
   return (
     <div>
-      <Nav />
       <Paper id="infoContainer">
         <h1>Info</h1>
         <p>A nice info page will live here :) </p>

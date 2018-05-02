@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
 
-import {Tabs, Tab} from 'material-ui'
-import Router from '@material-ui/icons/Router';
-import ShowChart from '@material-ui/icons/TrendingUp'
-import Add from '@material-ui/icons/LibraryAdd'
-import Play from '@material-ui/icons/PlayArrow'
+import {Tabs, Tab, PhoneIcon, FavoriteIcon, PersonPinIcon } from 'material-ui'
 
 const mapStateToProps = state => ({
   state
@@ -35,25 +31,14 @@ class Nav extends Component {
 
   render() {
     return(
-        
       <div className="navbar">
-            <Tabs
-                value={this.state.value}
-                onChange={this.handleChange}
-                fullWidth
-                indicatorColor="primary"
-                textColor="primary"
-            >
-          <Tab icon={<Router />} label="Devices" component={Link} to="/devices"/>
-          <Tab icon={<Add />} label="Add" component={Link} to="/addDevice"/>
-          <Tab icon={<Play />} label="Instant" component={Link} to="/instant"/>
-          <Tab icon={<ShowChart />} label="Graph" component={Link} to="/graph"/>
-        </Tabs>
-      
-
-{/* start */}
-        {/* <div>
+        <div>
           <ul>
+            {/* <li>
+              <Link to="/user">
+                User Home
+              </Link>
+            </li> */}
             <li>
               <Link to="/devices">
                 Devices
@@ -86,13 +71,10 @@ class Nav extends Component {
               </button>
             </li>
           </ul>
-        </div> */}
-{/* end */}
+        </div>
       </div>
     )
   }
 }
 
-let routerNav = withRouter(Nav)
-
-export default connect(mapStateToProps) (routerNav);
+export default connect(mapStateToProps) (Nav);

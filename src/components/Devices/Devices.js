@@ -51,9 +51,8 @@ class Devices extends Component {
 
     return (
       <div>
-        <Nav />
+        {/* <Nav /> */}
         
-        <h1>Devices</h1>
           {devicesItemArray}
        
 
