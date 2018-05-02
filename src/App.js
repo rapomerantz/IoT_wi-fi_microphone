@@ -23,7 +23,7 @@ import './styles/main.css';
 
 const App = () => (
   <div>
-    <Header title="Project Base" />
+    <Header title="Is It Loud In Here?" />
     <Router>
       <Switch>
         <Redirect exact from="/" to="/devices" />

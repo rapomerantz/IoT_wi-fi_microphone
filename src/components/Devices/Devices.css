@@ -1,8 +1,26 @@
+h1 {
+    text-align: center; 
+}
+
 .devicePaper {
     width: 100%;
     height: 100px; 
+    max-height: 100px; 
+    margin-top: 25px; 
+
 }
 
 .deviceName {
-    padding-top: 50px; 
+    padding-top: 15px; 
+    padding-left: 20px; 
+}
+
+#deviceEdit {
+    margin-top: 22px; 
+}
+#deviceDelete {
+    margin-top: 18px; 
+}
+#deviceMore {
+    margin-top: 18px; 
 }

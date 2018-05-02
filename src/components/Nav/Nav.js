@@ -22,11 +22,11 @@ class Nav extends Component {
       <div className="navbar">
         <div>
           <ul>
-            <li>
+            {/* <li>
               <Link to="/user">
                 User Home
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/devices">
                 Devices
@@ -61,7 +61,6 @@ class Nav extends Component {
           </ul>
         </div>
       </div>
-
     )
   }
 }

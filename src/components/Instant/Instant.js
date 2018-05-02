@@ -28,7 +28,7 @@ class Instant extends Component {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
     this.fetchDevices(); 
     this.fetchSpl(); 
-    this.timer = setInterval(this.tick, 2500);  //<-- setting interval for reset timer (2.5 seconds)
+    this.timer = setInterval(this.tick, 1000);  //<-- setting interval for reset timer (1 second)
   }
 
 //check user - boot unauthorized user
@@ -42,7 +42,7 @@ class Instant extends Component {
     clearInterval(this.timer);
   }
 
-//function to run every 2.5 seconds (update spl) IF switch is on
+//function to run every 1 second (update spl) IF switch is on
 tick = () => {
   if (this.state.switch) {
     this.fetchSpl(); 

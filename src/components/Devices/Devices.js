@@ -52,10 +52,10 @@ class Devices extends Component {
     return (
       <div>
         <Nav />
-        <Paper>
+        
         <h1>Devices</h1>
           {devicesItemArray}
-        </Paper>
+       
 
 
 

@@ -16,7 +16,7 @@ class Chart extends Component {
 render() {
 
   //breaking apart splReducer array to use for chart data
-  let splReducer = this.props.state.splReducer;
+  let splReducer = this.props.state.splReducer.reverse();
   let splStampMap = splReducer.map((item) => {
       let formatedStamp = moment(item.stamp).format('hh:mm:ss');
       return formatedStamp;   

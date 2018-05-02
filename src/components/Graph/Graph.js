@@ -1,12 +1,12 @@
 /* //Samples per TIME division:
-//1 min - 6
-//5 min - 30
-//10 min - 60
-//1 hr - 360
-//2 hr - 720
-//6 hr - 2160
-//12 hr - 4320
-//24 hr - 8640 */
+//1 min - 12
+//5 min - 60
+//10 min - 120
+//1 hr - 720
+//2 hr - 1440
+//6 hr - 4320
+//12 hr - 8640
+//24 hr - 17280 */
 
 
 import React, { Component } from 'react';
@@ -34,7 +34,7 @@ class Graph extends Component {
       this.timer = null;
       this.state = {
         selectedDevice: '3a0027001647343339383037',
-        timeSelection: 6,
+        timeSelection: 12,
         switch: true,
       };
     }
@@ -52,6 +52,11 @@ class Graph extends Component {
       this.props.history.push('home');
     }
   }
+
+//stop timer when leaving page
+componentWillUnmount () {
+  clearInterval(this.timer);
+}
 
 //function to run every 2.5 seconds (update spl) IF switch is on
 tick = () => {
@@ -173,11 +178,11 @@ handleSwitch = name => event => {
               />
 
             <select onChange={this.handleTimeSelect}>
-              <option value="6">1 Minute</option>
-              <option value="12">2 Minutes</option>
-              <option value="30">5 Minutes</option>
-              <option value="60">10 Minutes</option>
-              <option value="360">1 Hour</option>
+              <option value="12">1 Minute</option>
+              <option value="24">2 Minutes</option>
+              <option value="60">5 Minutes</option>
+              <option value="120">10 Minutes</option>
+              <option value="720">1 Hour</option>
             </select>
 
             <select onChange={this.handleDeviceSelect}>

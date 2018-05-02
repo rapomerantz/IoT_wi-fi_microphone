@@ -8,7 +8,7 @@ const moment = require('moment');
 
 
 // Every 10 seconds makes an axios call to Photon
-new CronJob('*/10 * * * * *', function() {
+new CronJob('*/5 * * * * *', function() {
     console.log('...axios.get sending...'); 
     axios.get("https://api.spark.io/v1/devices/3a0027001647343339383037/audioSpl?access_token=e91ff47d87b3de73e3bae77bb9c6d6d8ab1504dd").then((response) => {
         // console.log(response.data);
