@@ -18,8 +18,9 @@ import { Button, Card, Menu, MenuItem, Switch, FormControlLabel } from 'material
 import './Graph.css'
 import moment from 'moment'
 import Chart from './Chart.js'
+import GraphSelectOptions from './GraphSelectOptions.js'
 
-var LineChart = require("react-chartjs").Line;
+
 
 
 //connect to redux
@@ -88,6 +89,14 @@ handleTimeSelect = (event) => {
   this.fetchSpl(); 
 }
 
+handleDeviceSelect = (event) => {
+  console.log('select value: ',event.target.value);
+  this.setState({
+    selectedDevice: event.target.value
+  });    
+  this.fetchSpl(); 
+}
+
 //switch toggles auto update 
 handleSwitch = name => event => {
   this.setState({ [name]: event.target.checked });  
@@ -112,6 +121,12 @@ handleSwitch = name => event => {
     // const { anchorElDevice } = this.state;
     // const { anchorElTime } = this.state;
 
+  //looping through devices & returning <option> elemnts to populate <select>
+  let selectItemsArray = this.props.state.devicesReducer.devicesReducer && this.props.state.devicesReducer.devicesReducer; 
+  let selectOptions = selectItemsArray.map((element) => {
+      return <GraphSelectOptions key={element.device_id}
+                                    element={element}/>
+  })
 
 
     return (
@@ -164,13 +179,15 @@ handleSwitch = name => event => {
               <option value="60">10 Minutes</option>
               <option value="360">1 Hour</option>
             </select>
+
+            <select onChange={this.handleDeviceSelect}>
+              {selectOptions}
+            </select>
               
 
             <div className="graphWire">
               <Chart/>  
             </div>
-
-            <div className="warningWire"></div>
 
             <Button variant="raised" color="primary" className="buttonWire">See Instant</Button>
           </Card>

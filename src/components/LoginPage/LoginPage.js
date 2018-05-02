@@ -25,7 +25,7 @@ class LoginPage extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user.userName) {
-      this.props.history.push('/user');
+      this.props.history.push('/devices');  //<-- I CHANGED THIS TO SEND THE USER IMMEDIATLY TO THE DEVICES PAGE
     }
   }
 

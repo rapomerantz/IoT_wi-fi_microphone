@@ -73,7 +73,7 @@ tick = () => {
     })    
   }
 
-  handleSelect = (event) => {
+  handleDeviceSelect = (event) => {
     console.log('select value: ',event.target.value);
     this.setState({
       selectedDevice: event.target.value
@@ -118,7 +118,7 @@ handleSwitch = name => event => {
             label="<- Auto Update"
           />
 
-          <select onChange={this.handleSelect}>
+          <select onChange={this.handleDeviceSelect}>
             {selectOptions}
           </select>
 

@@ -5,7 +5,7 @@ const mapStateToProps = state => ({
   state
 });
 
-class InstantSelectOption extends Component {
+class GraphSelectOptions extends Component {
 
 render() {
 
@@ -16,5 +16,5 @@ render() {
 }
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(InstantSelectOption);
+export default connect(mapStateToProps)(GraphSelectOptions);
   
