@@ -9,31 +9,18 @@
     color: #ece7e7;
 }
 
-#logoutButton {
-    float: right; 
-    color: #ece7e7;
-    font-size: 16px;
-
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
 /* Change the link color to #111 (black) on hover */
 li button:hover {
     text-decoration: underline;
     color: #eee;
+}
+
+#appBarButton {
+    color: #ece7e7;
+    font-size: 12px;
+}
+
+#logoutButton {
+    float: right; 
+    color: #ece7e7;
 }
