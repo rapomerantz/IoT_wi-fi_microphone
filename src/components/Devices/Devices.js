@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
+
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { } from 'material-ui';
+import { Button } from 'material-ui';
 import DevicesItem from './DevicesItem.js'
 import './Devices.css'
+
 
 //connect to redux
 const mapStateToProps = state => ({
@@ -47,11 +50,15 @@ class Devices extends Component {
 
     return (
       <div>
-        
+
+        <Button id="addDeviceLink" 
+                variant="raised" 
+                fullWidth={true} 
+                component={Link} to="/addDevice">
+          Add Device
+        </Button>
+
           {devicesItemArray}
-       
-
-
 
       </div>
     );

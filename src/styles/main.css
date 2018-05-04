@@ -4,8 +4,6 @@ body {
     padding: 0px; 
 }
 
-
-
 form {
     background-color: #dbd5d5;
     width: 30%;
@@ -47,5 +45,19 @@ input[type="submit"] {
   color: white; 
 }
 
+.instructions h1 {
+    font-size: 24px;
+    font-weight: 700;
+}
 
+.instructions {
+    background-color: #2a8cc5;
+    padding: 2px;
+    color: #ece7e7;
+}
 
+/* Change the link color to #111 (black) on hover */
+li button:hover {
+    text-decoration: underline;
+    color: #eee;
+}

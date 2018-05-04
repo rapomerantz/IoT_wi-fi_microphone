@@ -22,3 +22,9 @@ h1 {
 .deviceMore {
     margin-top: 18px; 
 }
+
+#addDeviceLink {
+    background-color: #2a8cc5;
+    color: white; 
+    border-radius: 0px; 
+}
