@@ -4,8 +4,6 @@ h1 {
 
 .devicePaper {
     width: 100%;
-    height: 100px; 
-    max-height: 100px; 
     margin-top: 25px; 
 
 }
@@ -15,12 +13,12 @@ h1 {
     padding-left: 20px; 
 }
 
-#deviceEdit {
+.deviceEdit {
     margin-top: 22px; 
 }
-#deviceDelete {
+.deviceDelete {
     margin-top: 18px; 
 }
-#deviceMore {
+.deviceMore {
     margin-top: 18px; 
 }

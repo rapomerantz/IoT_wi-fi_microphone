@@ -5,6 +5,8 @@ function* devicesSaga() {
     yield takeEvery ('FETCH_DEVICES', fetchDevicesSaga); 
     yield takeEvery ('ADD_DEVICE', addDeviceSaga); 
     yield takeEvery ('FETCH_SPL', fetchSplSaga);
+    yield takeEvery ('DELETE_DEVICE', deleteDeviceSaga); 
+    yield takeEvery ('EDIT_DEVICE', editDeviceSaga); 
 }
 
 
@@ -28,13 +30,11 @@ function* addDeviceSaga(action) {
     console.log('in addDeviceSaga');
     try {
         yield call (axios.post, '/api/devices', action.payload); 
-        yield put ({type: 'FETCH_DEVICES'});  //<-- triggers GET in fetchDevicesSaga above
+        yield put ({type: 'FETCH_DEVICES'});  //<-- triggers GET in fetchDevicesSaga above to repopulate devices
     } catch (error) {
         console.log('error in addDeviceSaga', error);           
     }
 }
-
-
 
 function* fetchSplSaga(action) {
     console.log('in fetchSplSaga', action.payload.selectedDevice);
@@ -46,6 +46,26 @@ function* fetchSplSaga(action) {
         });
     } catch (error) {
         console.log('error in fetchSpl Saga', error);
+    }
+}
+
+function* deleteDeviceSaga(action) {
+    console.log('in deleteDeviceSaga, device id: ', action.payload);
+        try {
+            yield call (axios.delete, `/api/devices/${action.payload}`); 
+            yield put ({type: 'FETCH_DEVICES'}) //<-- triggers GET in fetchDevicesSaga above to repopulate devices
+        } catch (error) {
+            console.log('error in deleteDeviceSaga', error); 
+        }
+}
+
+function* editDeviceSaga(action) {
+    console.log('in editDeviceSaga, payload:', action.payload);
+    try {
+        yield call (axios.put, `/api/devices`, action.payload)
+        yield put ({type: 'FETCH_DEVICES'}) //<-- triggers GET in fetchDevicesSaga above to repopulate devices        
+    } catch (error) {
+        console.log('error in editDeviceSaga', error); 
     }
 }
 

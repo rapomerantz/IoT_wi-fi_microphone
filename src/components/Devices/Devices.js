@@ -35,10 +35,7 @@ class Devices extends Component {
     });
   }
 
-
-
   render() {
-    console.log(this.props.state.devicesReducer.devicesReducer);
     let devicesReducer = this.props.state.devicesReducer.devicesReducer; 
 
     let devicesItemArray = devicesReducer.map((device) => {

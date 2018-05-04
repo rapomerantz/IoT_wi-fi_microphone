@@ -2,9 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+//GET
 router.get('/', (req, res) => {
     console.log('/api/devices GET reached');
     const queryText = `SELECT * FROM person_device WHERE person_id = $1;` //<-- user's id goes here
@@ -19,9 +17,7 @@ router.get('/', (req, res) => {
     })
 });
 
-/**
- * POST route template
- */
+//POST
 router.post('/', (req, res) => {
     let body = req.body;
     let user = req.user
@@ -36,7 +32,40 @@ router.post('/', (req, res) => {
         console.log('ERR in POST /api/devices', err);
         res.sendStatus(500); 
     })
-
 });
+
+//DELETE
+router.delete('/:id', (req, res) => {
+    let deviceId = req.params.id;
+    console.log(deviceId);
+    const queryText = `DELETE FROM person_device WHERE device_id = $1;`
+    pool.query(queryText, [deviceId])
+    .then((result) => {
+        console.log('successful DELETE /api/devices');
+        res.sendStatus(201);
+    })
+    .catch((err) => {
+        console.log('ERR in DELETE /api/devices', err);
+        res.sendStatus(500); 
+    })
+})
+
+//PUT
+router.put('/', (req, res) => {
+    let body = req.body;
+    console.log(body);
+    const queryText = `UPDATE person_device
+                        SET device_id = $1, auth_token = $2, device_name = $3
+                        WHERE device_id = $4;`
+    pool.query(queryText, [body.deviceId, body.authToken, body.deviceName, body.deviceId])
+    .then((result) => {
+        console.log('successful PUT /api/devices');
+        res.sendStatus(201);
+    })
+    .catch((err) => {
+        console.log('ERR in PUT /api/devices', err);
+        res.sendStatus(500); 
+    })
+})
 
 module.exports = router;

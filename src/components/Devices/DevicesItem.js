@@ -1,43 +1,114 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { Paper, Button, Grid, Typography } from 'material-ui';
+import DevicesDeleteDialog from './DevicesDeleteDialog.js'
+import DevicesEditDialog from './DevicesEditDialog.js'
 import './Devices.css'
+
+
+import {Button, Grid } from 'material-ui';
+import Card, { CardContent } from 'material-ui/Card';
+import Collapse from 'material-ui/transitions/Collapse';
 import Icon from 'material-ui/Icon';
+
+
+
 
 //connect to redux
 const mapStateToProps = state => ({
     state
 });
 
+
 class DevicesItem extends Component {
+    state = { 
+      expanded: false,
+      deleteDialog: false,
+      editDialog: false,
+    };
+
+
+//handle card expand
+  handleExpandClick = () => {
+    this.setState({ expanded: !this.state.expanded });
+  };
+
+//send delete to DB
+  deleteSaga = () => {
+    this.setState({ deleteDialog: false });
+    this.props.dispatch({
+      type: 'DELETE_DEVICE', 
+      payload: this.props.device.device_id
+    })
+  }
+
+//open DELETE dialog
+handleDeleteOpen = () => {
+  this.setState({ deleteDialog: true });
+};
+
+//open EDIT dialog
+handleEditOpen = () => {
+  this.setState({ editDialog: true });
+};
+
+//close delete dialog
+handleClose = () => {
+  this.setState({
+     deleteDialog: false,
+     editDialog: false
+    });
+};
 
   render() {
 
     return (
       <div>
-        <Paper>
 
-              <Paper className="devicePaper">
-            <Grid zeroMinWidth container spacing={16}>
-                <Grid item xs={2}>
-                  <div id="deviceMore"><Button ><Icon>expand_more</Icon></Button></div>
+            <Card className="devicePaper" >
+              <CardContent>
+                <Grid zeroMinWidth container spacing={16}>
+                    <Grid item xs={2}>
+                      <div className="deviceMore">
+                        <Button onClick={this.handleExpandClick}><Icon>expand_more</Icon></Button>
+                      </div>
+                    </Grid>
+                    <Grid item xs={5}>
+                        <div className="deviceName">
+                          <p>{this.props.device.device_name}</p>
+                        </div>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <div className="deviceEdit">
+                          <Button color="primary" onClick={this.handleEditOpen}>Edit</Button>
+                        </div>
+                    </Grid>
+                    <Grid item xs={2}>
+                      <div className="deviceDelete">
+                        <Button color="secondary" name="deleteDialog" onClick={this.handleDeleteOpen}><Icon>delete</Icon></Button>
+                      </div>
+                    </Grid>
                 </Grid>
-                <Grid item xs={5}>
-                    <div className="deviceName"><p>{this.props.device.device_name}</p></div>
-                </Grid>
-                <Grid item xs={2}>
-                    <div id="deviceEdit"><Button color="primary">Edit</Button></div>
-                </Grid>
-                <Grid item xs={2}>
-                  <div id="deviceDelete"><Button color="secondary"><Icon>delete</Icon></Button></div>
-                </Grid>
-            </Grid>
+              </CardContent>
 
-              </Paper>
+              {/* collapse content: more device info */}
+              <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                  <CardContent>
+                      <i>Id: <br/> {this.props.device.device_id}</i>
+                      <br/>
+                      <i>Auth Token: <br/> {this.props.device.auth_token}</i>
+                    </CardContent>
+                </Collapse>
 
+            </Card>
+
+            <DevicesDeleteDialog deleteDialog={this.state.deleteDialog} // <-- passing thru open/close boolean
+                                  handleClose={this.handleClose}
+                                  deleteSaga={this.deleteSaga}/> 
             
-        </Paper>
+            <DevicesEditDialog  device={this.props.device} //<-- passing all of device thru to edit dialog
+                                editDialog={this.state.editDialog} // <-- passing thru open/close boolean
+                                handleClose={this.handleClose}/> 
+   
       </div>
     );
   }
