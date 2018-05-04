@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import DevicesDeleteDialog from './DevicesDeleteDialog.js'
 
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -9,8 +10,6 @@ import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-
 import Collapse from 'material-ui/transitions/Collapse';
 import IconButton from 'material-ui/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-
 
 import './Devices.css'
 import Icon from 'material-ui/Icon';
@@ -44,25 +43,46 @@ const styles = theme => ({
 });
 
 
+
+
+
 class DevicesItem extends Component {
-    state = { expanded: false };
+    state = { 
+      expanded: false,
+      deleteDialog: false
+    };
 
 
 //handle card expand
-handleExpandClick = () => {
-  console.log('expand');
-  this.setState({ expanded: !this.state.expanded });
-  console.log(this.state);
-  
+  handleExpandClick = () => {
+    console.log('expand');
+    this.setState({ expanded: !this.state.expanded });
+    console.log(this.state);
+  };
+
+//send delete to DB
+  deleteSaga = () => {
+    this.setState({ deleteDialog: false });
+    this.props.dispatch({
+      type: 'DELETE_DEVICE', 
+      payload: this.props.device.device_id
+    })
+  }
+
+//open delete dialog
+handleDeleteClickOpen = () => {
+  console.log('delete clicked', this.props.device);
+  this.setState({ deleteDialog: true });
 };
 
-handleDeleteClick = () => {
-  console.log('delete clicked', this.props.device);
-  this.props.dispatch({
-    type: 'DELETE_DEVICE', 
-    payload: this.props.device.device_id
-  })
-}
+//close delete dialog
+handleClose = () => {
+  this.setState({ deleteDialog: false });
+};
+
+
+
+
 
 
   render() {
@@ -92,11 +112,13 @@ handleDeleteClick = () => {
                     </Grid>
                     <Grid item xs={2}>
                       <div className="deviceDelete">
-                        <Button color="secondary" onClick={this.handleDeleteClick}><Icon>delete</Icon></Button>
+                        <Button color="secondary" onClick={this.handleDeleteClickOpen}><Icon>delete</Icon></Button>
                       </div>
                     </Grid>
                 </Grid>
               </CardContent>
+              
+              {/* collapse content: more device info */}
               <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                   <CardContent>
                       <i>Id: <br/> {this.props.device.device_id}</i>
@@ -104,7 +126,20 @@ handleDeleteClick = () => {
                       <i>Auth Token: <br/> {this.props.device.auth_token}</i>
                     </CardContent>
                 </Collapse>
+
             </Card>
+
+
+            <DevicesDeleteDialog deleteDialog={this.state.deleteDialog}
+                                  handleClose={this.handleClose}
+                                  deleteSaga={this.deleteSaga}/>
+
+
+
+
+
+
+            
  
       </div>
     );

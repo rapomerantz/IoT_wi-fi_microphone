@@ -54,9 +54,9 @@ function* deleteDeviceSaga(action) {
             yield call (axios.delete, `/api/devices/${action.payload}`); 
             yield put ({type: 'FETCH_DEVICES'}) //<-- triggers GET in fetchDevicesSaga above to repopulate devices
         } catch (error) {
-            
+            console.log('error in deleteDeviceSaga', error);
+               
         }
-    
 }
 
 
