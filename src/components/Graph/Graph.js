@@ -12,11 +12,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { Button, Card, Menu, MenuItem, Switch, FormControlLabel } from 'material-ui';
+import { Switch, FormControlLabel } from 'material-ui';
 import './Graph.css'
-import moment from 'moment'
 import Chart from './Chart.js'
 import GraphSelectOptions from './GraphSelectOptions.js'
 

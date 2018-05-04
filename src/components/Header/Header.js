@@ -5,8 +5,6 @@ import './Header.css'
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
 
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';

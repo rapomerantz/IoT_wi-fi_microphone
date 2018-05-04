@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Nav from '../../components/Nav/Nav';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
-import { Paper } from 'material-ui';
+import { } from 'material-ui';
 import DevicesItem from './DevicesItem.js'
 import './Devices.css'
 
@@ -48,7 +47,6 @@ class Devices extends Component {
 
     return (
       <div>
-        {/* <Nav /> */}
         
           {devicesItemArray}
        

@@ -3,7 +3,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
-import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
 
 import {Tabs, Tab} from 'material-ui'
