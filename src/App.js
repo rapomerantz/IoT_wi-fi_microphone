@@ -25,7 +25,7 @@ import './styles/main.css';
 
 const App = () => (
   <div>
-    <Header title="Is It Loud In Here?" />
+    {/* <Header title="Is It Loud In Here?" /> */}
     <Router>
       <div>
         <Nav/>
