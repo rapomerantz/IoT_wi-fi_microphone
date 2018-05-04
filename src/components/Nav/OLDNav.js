@@ -13,21 +13,11 @@ const mapStateToProps = state => ({
 });
 
 class Nav extends Component {
-  constructor(props) {
-    super(props) 
-    this.state = {
-      value: 0
-    }
-  }
 
   logout = () => {
     this.props.dispatch(triggerLogout());
     // this.props.history.push('home');
   }
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
 
   render() {
     return(

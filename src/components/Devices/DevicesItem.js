@@ -11,8 +11,6 @@ import Collapse from 'material-ui/transitions/Collapse';
 import Icon from 'material-ui/Icon';
 
 
-
-
 //connect to redux
 const mapStateToProps = state => ({
     state
@@ -32,7 +30,8 @@ class DevicesItem extends Component {
     this.setState({ expanded: !this.state.expanded });
   };
 
-//send delete to DB
+
+//send delete to DB ~ I didn't move this into the component because it didn't seem necessary
   deleteSaga = () => {
     this.setState({ deleteDialog: false });
     this.props.dispatch({
