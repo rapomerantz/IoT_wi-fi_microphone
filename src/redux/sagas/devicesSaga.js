@@ -6,6 +6,7 @@ function* devicesSaga() {
     yield takeEvery ('ADD_DEVICE', addDeviceSaga); 
     yield takeEvery ('FETCH_SPL', fetchSplSaga);
     yield takeEvery ('DELETE_DEVICE', deleteDeviceSaga); 
+    yield takeEvery ('EDIT_DEVICE', editDeviceSaga); 
 }
 
 
@@ -54,9 +55,18 @@ function* deleteDeviceSaga(action) {
             yield call (axios.delete, `/api/devices/${action.payload}`); 
             yield put ({type: 'FETCH_DEVICES'}) //<-- triggers GET in fetchDevicesSaga above to repopulate devices
         } catch (error) {
-            console.log('error in deleteDeviceSaga', error);
-               
+            console.log('error in deleteDeviceSaga', error); 
         }
+}
+
+function* editDeviceSaga(action) {
+    console.log('in editDeviceSaga, payload:', action.payload);
+    try {
+        yield call (axios.put, `/api/devices`, action.payload)
+        yield put ({type: 'FETCH_DEVICES'}) //<-- triggers GET in fetchDevicesSaga above to repopulate devices        
+    } catch (error) {
+        console.log('error in editDeviceSaga', error); 
+    }
 }
 
 
