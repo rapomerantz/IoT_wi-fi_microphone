@@ -44,17 +44,6 @@ const styles = theme => ({
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
 class DevicesItem extends Component {
     state = { expanded: false };
 
@@ -66,6 +55,14 @@ handleExpandClick = () => {
   console.log(this.state);
   
 };
+
+handleDeleteClick = () => {
+  console.log('delete clicked', this.props.device);
+  this.props.dispatch({
+    type: 'DELETE_DEVICE', 
+    payload: this.props.device.device_id
+  })
+}
 
 
   render() {
@@ -79,16 +76,24 @@ handleExpandClick = () => {
               <CardContent>
                 <Grid zeroMinWidth container spacing={16}>
                     <Grid item xs={2}>
-                      <div className="deviceMore"><Button onClick={this.handleExpandClick}><Icon className="expandOpen">expand_more</Icon></Button></div>
+                      <div className="deviceMore">
+                        <Button onClick={this.handleExpandClick}><Icon>expand_more</Icon></Button>
+                      </div>
                     </Grid>
                     <Grid item xs={5}>
-                        <div className="deviceName"><p>{this.props.device.device_name}</p></div>
+                        <div className="deviceName">
+                          <p>{this.props.device.device_name}</p>
+                        </div>
                     </Grid>
                     <Grid item xs={2}>
-                        <div className="deviceEdit"><Button color="primary">Edit</Button></div>
+                        <div className="deviceEdit">
+                          <Button color="primary">Edit</Button>
+                        </div>
                     </Grid>
                     <Grid item xs={2}>
-                      <div className="deviceDelete"><Button color="secondary"><Icon>delete</Icon></Button></div>
+                      <div className="deviceDelete">
+                        <Button color="secondary" onClick={this.handleDeleteClick}><Icon>delete</Icon></Button>
+                      </div>
                     </Grid>
                 </Grid>
               </CardContent>

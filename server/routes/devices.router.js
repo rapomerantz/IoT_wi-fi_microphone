@@ -36,7 +36,22 @@ router.post('/', (req, res) => {
         console.log('ERR in POST /api/devices', err);
         res.sendStatus(500); 
     })
-
 });
+
+router.delete('/:id', (req, res) => {
+    let deviceId = req.params.id;
+    console.log(deviceId);
+    const queryText = `DELETE FROM person_device WHERE device_id = $1;`
+    pool.query(queryText, [deviceId])
+    .then((result) => {
+        console.log('successful DELETE /api/devices');
+        res.sendStatus(201);
+    })
+    .catch((err) => {
+        console.log('ERR in DELETE /api/devices', err);
+        res.sendStatus(500); 
+    })
+    
+})
 
 module.exports = router;
