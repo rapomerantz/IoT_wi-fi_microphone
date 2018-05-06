@@ -18,7 +18,7 @@ class Instant extends Component {
       this.timer = null;
       this.state = {
           selectedDevice: '3a0027001647343339383037',
-          switch: false,
+          switch: true,
       };
     }
 
