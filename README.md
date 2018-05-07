@@ -1,6 +1,6 @@
 # Is It Loud In Here? (Work In Progress)
 
-Musicians and non-musicians alike know how devastating hearing damage can be but it’s difficult to know, quantifiably, just how loud your surroundings are at any given moment. “Is It Loud In Here?” is a combined web-app/Internet of Things (IoT) solution that allows the user to use wi-fi connected microphones to monitor the ambient volume in a space instantaneously and track the ambient volume over time. 
+Hearing damage can be truly devestating but it’s difficult to know, quantifiably, just how loud your surroundings are at any given moment. “Is It Loud In Here?” is a combined web-app/Internet of Things (IoT) solution that allows the user to use wi-fi connected microphones to monitor the ambient volume in a space instantaneously and track the ambient volume over time. 
 
 ## Technologies used: 
 - Particle Photon
@@ -51,6 +51,12 @@ CREATE TABLE spl_data (
 );
 
 ```
+
+### Future Goals: 
+- Incorperating Twilio's text message API to notify users of dangerous SPL readings
+- Additional styling on some mobile pages
+- Additional styling so the app is more accessible on desktop displays
+
 
 
 ### Hand-crafted by R. Atticus Pomerantz
