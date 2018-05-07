@@ -42,7 +42,7 @@ class Graph extends Component {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
     this.fetchDevices();
     this.fetchSpl(); 
-    this.timer = setInterval(this.tick, 2500);  //<-- setting interval for reset timer (2.5 seconds)
+    this.timer = setInterval(this.tick, 500);  //<-- setting interval for reset timer (2.5 seconds)
   }
 //check user - boot unauthorized user
   componentDidUpdate() {
@@ -187,7 +187,7 @@ handleSwitch = name => event => {
               
 
             <div className="graphWire">
-              <Chart/>  
+              <Chart/>   
             </div>
 
             {/* <Button variant="raised" color="primary" className="buttonWire">See Instant</Button> */}
