@@ -55,5 +55,5 @@ CREATE TABLE spl_data (
 
 ### Hand-crafted by R. Atticus Pomerantz
 
-### Special thanks to Davide Gironi for his 2014 Particle Spark library from which I based my Photon code: 
-// http://github.com/davidegironi/spark-audiogetaveragelib
+Special thanks to Davide Gironi for his 2014 Particle Spark library from which I based my Photon code: 
+http://github.com/davidegironi/spark-audiogetaveragelib
