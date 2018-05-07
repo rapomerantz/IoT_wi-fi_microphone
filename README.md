@@ -17,7 +17,7 @@ Hearing damage can be truly devestating but it’s difficult to know, quantifiab
 ## Screenshots: 
 This is a work in progress, screens will benefit from  additional styling and are subject to change
 
-<img src="documentation/images/microphone.jpg" width ="240" alt="The Device">
+<img src="documentation/images/microphone.JPG" width ="240" alt="The Device">
 <img src="documentation/images/devices_screen2.png" width ="240" alt="Devices Screen">
 <img src="documentation/images/instant_screen2.png" width ="240" alt="Instant View">
 <img src="documentation/images/graph_screen2.png" width ="240" alt="Graph View">
