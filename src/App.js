@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom';
 
 //login&static views
-import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import UserPage from './components/UserPage/UserPage';
@@ -25,7 +24,6 @@ import './styles/main.css';
 
 const App = () => (
   <div>
-    {/* <Header title="Is It Loud In Here?" /> */}
     <Router>
       <div>
         <Nav/>

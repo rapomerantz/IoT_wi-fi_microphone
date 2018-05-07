@@ -8,7 +8,6 @@ import { triggerLogout } from '../../redux/actions/loginActions';
 import {Tabs, Tab} from 'material-ui'
 import Router from '@material-ui/icons/Router';
 import ShowChart from '@material-ui/icons/TrendingUp'
-import Add from '@material-ui/icons/LibraryAdd'
 import Play from '@material-ui/icons/PlayArrow'
 import Person from '@material-ui/icons/Person'
 import AppBar from 'material-ui/AppBar';
@@ -39,9 +38,6 @@ class Nav extends Component {
     // this.props.history.push('home');
   }
 
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
 
   toggleDrawer = (side, open) => () => {
     this.setState({
@@ -79,6 +75,8 @@ class Nav extends Component {
           <Tab icon={<Person />} label="User" onClick={this.toggleDrawer('top', true)}/>
         </Tabs>
 
+
+{/* LOGOUT drawer ~ could be componentized */}
         <Drawer anchor="top" open={this.state.top} onClose={this.toggleDrawer('top', false)}>
           <div
             tabIndex={0}

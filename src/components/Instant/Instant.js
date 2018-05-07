@@ -17,7 +17,7 @@ class Instant extends Component {
       super(props) 
       this.timer = null;
       this.state = {
-          selectedDevice: '3a0027001647343339383037',
+          selectedDevice: '3a0027001647343339383037', //<-- auto-select my device, change this later
           switch: true,
       };
     }
@@ -56,9 +56,6 @@ tick = () => {
     });
   }
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
 
 //GET most recent SPL data from db
   fetchSpl = () => {
@@ -80,10 +77,10 @@ tick = () => {
     this.fetchSpl(); 
   }
 
-//switch toggles auto update 
-handleSwitch = name => event => {
-  this.setState({ [name]: event.target.checked });  
-};
+//switch toggles auto-update 
+  handleSwitch = name => event => {
+    this.setState({ [name]: event.target.checked });  
+  };
 
   render() {
 
@@ -116,23 +113,6 @@ handleSwitch = name => event => {
             }
             label="Connect"
           />
-
-          
-
-         
-
-          {/* <FormControl>
-            <InputLabel>Select Device</InputLabel>
-              <Select
-                value={this.state.selectedDevice}
-                onChange={this.handleChange}
-                name="selectedDevice">
-                  <MenuItem value={this.state.selectedDevice}><em>Select Device</em></MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-          </FormControl> */}
 
             <div id="instantBox">
               <p id="instantText">{newSpl}</p>

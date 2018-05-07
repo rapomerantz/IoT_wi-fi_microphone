@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
-const mapStateToProps = state => ({
-  state
-});
 
 class InstantSelectOption extends Component {
 
@@ -15,6 +11,5 @@ render() {
 }
 }
 
-// this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(InstantSelectOption);
+export default InstantSelectOption;
   

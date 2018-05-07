@@ -1,18 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import './Instant.css'
 
-
-const mapStateToProps = state => ({
-  state
-});
-
 class InstantWarning extends Component {
-
-
-//check user - boot unauthorized user
-
-
 render() {
 
 //Changing color/contents of warning <div> based on most recent SPL data
@@ -31,18 +20,18 @@ render() {
       warningMessage = 'High risk.'
     }
     else {
-      warningClassName = 'warningGreen'; 
-      warningMessage = 'It\'s not too loud in here, you should be fine'; 
+      warningClassName = ''; 
+      warningMessage = 'Something\'s Wrong...Check your microphone'; 
     }
 //End change color/content
 
-  return (
-    <div className={warningClassName}>
-        <p id="instantWarningText">{warningMessage}</p>
-    </div>
-  );
-}
+
+    return (
+      <div className={warningClassName}>
+          <p id="instantWarningText">{warningMessage}</p>
+      </div>
+    );
+  }
 }
 
-// this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(InstantWarning);
+export default InstantWarning;

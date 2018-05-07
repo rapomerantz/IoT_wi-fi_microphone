@@ -19,7 +19,6 @@ class Devices extends Component {
   componentDidMount() {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
     this.fetchDevices(); 
-
   }
 
 //check user - boot unauthorized user
@@ -40,6 +39,7 @@ class Devices extends Component {
   render() {
     let devicesReducer = this.props.state.devicesReducer.devicesReducer; 
 
+//.map() over redux devicesReducer to make list of user's devices
     let devicesItemArray = devicesReducer.map((device) => {
       return <DevicesItem key={device.id}
                           device={device}/>
@@ -51,6 +51,7 @@ class Devices extends Component {
     return (
       <div>
 
+  {/* Link to AddDevice page ~ may switch to a modal */}
         <Button id="addDeviceLink" 
                 variant="raised" 
                 fullWidth={true} 

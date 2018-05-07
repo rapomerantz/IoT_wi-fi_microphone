@@ -1,14 +1,3 @@
-/* //Samples per TIME division:
-//1 min - 12
-//5 min - 60
-//10 min - 120
-//1 hr - 720
-//2 hr - 1440
-//6 hr - 4320
-//12 hr - 8640
-//24 hr - 17280 */
-
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -17,8 +6,6 @@ import { Switch, FormControlLabel } from 'material-ui';
 import './Graph.css'
 import Chart from './Chart.js'
 import GraphSelectOptions from './GraphSelectOptions.js'
-
-
 
 
 //connect to redux
@@ -42,7 +29,7 @@ class Graph extends Component {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
     this.fetchDevices();
     this.fetchSpl(); 
-    this.timer = setInterval(this.tick, 500);  //<-- setting interval for reset timer (2.5 seconds)
+    this.timer = setInterval(this.tick, 500);  //<-- setting interval for reset timer (.5 seconds)
   }
 //check user - boot unauthorized user
   componentDidUpdate() {
@@ -56,7 +43,7 @@ componentWillUnmount () {
   clearInterval(this.timer);
 }
 
-//function to run every 2.5 seconds (update spl) IF switch is on
+//function to run every .5 seconds (update spl) IF switch is on
 tick = () => {
   if (this.state.switch) {
     this.fetchSpl(); 
@@ -105,7 +92,7 @@ handleSwitch = name => event => {
   this.setState({ [name]: event.target.checked });  
 };
 
-//START Menu handlers
+//START Menu handlers NOT CURRENTLY BEING USED
   closeDeviceMenu = () => {
     this.setState({ anchorElDevice: null });
   };
@@ -118,7 +105,7 @@ handleSwitch = name => event => {
   openTimeMenu = event => {
     this.setState({ anchorElTime: event.currentTarget });
   };
-//END Menu handlers
+//END Menu handlers NOT CURRENTLY BEING USED
 
   render() {
     // const { anchorElDevice } = this.state;
@@ -136,7 +123,7 @@ handleSwitch = name => event => {
       <div>
         <div id="graphContainer">
 
-{/* start UI menus */}
+{/* start UI menus NOT CURRENTLY BEING USED */}
           {/* <Menu id="deviceSelect"
                 anchorEl = {anchorElDevice}
                 open={Boolean(anchorElDevice)}
@@ -153,12 +140,11 @@ handleSwitch = name => event => {
               <MenuItem onClick={this.closeTimeMenu}>Time</MenuItem>
               <MenuItem onClick={this.closeTimeMenu}>Time</MenuItem>
           </Menu> */}
-{/* end UI menus */}
-
-          {/* <pre>{JSON.stringify(this.state)}</pre> */}
+{/* end UI menus NOT CURRENTLY BEING USED */}
 
           <div id="graphContent">
-            {/* Anchor Element for Menu */}
+
+            {/* Anchor Element for Menu NOT CURRENTLY BEING USED */}
             {/* <Button variant="raised" color="primary" className="buttonWire" onClick={this.openDeviceMenu}> Select Device </Button>
             <Button variant="raised" color="primary" className="buttonWire" onClick={this.openTimeMenu}> Select Timeframe </Button> */}
 
@@ -173,6 +159,7 @@ handleSwitch = name => event => {
               label="<- Auto Update"
               />
 
+            {/* Select time */}
             <select onChange={this.handleTimeSelect}>
               <option value="12">1 Minute</option>
               <option value="24">2 Minutes</option>
@@ -181,6 +168,7 @@ handleSwitch = name => event => {
               <option value="720">1 Hour</option>
             </select>
 
+            {/* Select device */}
             <select onChange={this.handleDeviceSelect}>
               {selectOptions}
             </select>
