@@ -2,6 +2,7 @@
 
 Hearing damage can be truly devestating but it’s difficult to know, quantifiably, just how loud your surroundings are at any given moment. “Is It Loud In Here?” is a combined web-app/Internet of Things (IoT) solution that allows the user to use wi-fi connected microphones to monitor the ambient volume in a space instantaneously and track the ambient volume over time. 
 
+
 ## Technologies used: 
 - Particle Photon
 - React.js
@@ -12,6 +13,15 @@ Hearing damage can be truly devestating but it’s difficult to know, quantifiab
 - Express
 - PostgreSQL
 - Passport
+
+## Screenshots: 
+This is a work in progress, screens will benefit from  additional styling and are subject to change
+
+! [Devices screen] (documentation/images/devices_screen.png)
+
+! [Instant reading screen] (documentation/images/instant_screen.png)
+
+! [Graph display screen] (documentation/images/graph_screen.png)
 
 ## Getting Started: 
 
@@ -52,7 +62,8 @@ CREATE TABLE spl_data (
 
 ```
 
-### Future Goals: 
+### Next Steps:
+- Instructions for connecting a new Photon & code to flash
 - Incorperating Twilio's text message API to notify users of dangerous SPL readings
 - Additional styling on some mobile pages
 - Additional styling so the app is more accessible on desktop displays
