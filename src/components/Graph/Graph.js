@@ -187,7 +187,7 @@ handleSwitch = name => event => {
               
 
             <div className="graphWire">
-              <Chart/>  
+              <Chart/>   
             </div>
 
             {/* <Button variant="raised" color="primary" className="buttonWire">See Instant</Button> */}

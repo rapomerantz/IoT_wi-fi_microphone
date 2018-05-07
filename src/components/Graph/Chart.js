@@ -11,8 +11,6 @@ const mapStateToProps = state => ({
 });
 
 class Chart extends Component {
-
-
 render() {
 
   //breaking apart splReducer array to use for chart data
