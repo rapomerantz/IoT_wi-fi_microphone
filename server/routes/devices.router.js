@@ -100,21 +100,69 @@ router.put('/toggleActive', (req, res) => {
 })
 
 
-const job = new CronJob({
-    cronTime: '*/1 * * * * *',
-    onTick: function () {
-        console.log('test cron TICK');
-    },
-    start: false, 
-    timeZone: 'America/Los_Angeles'
-});
+// const job = new CronJob({
+//     cronTime: '*/1 * * * * *',
+//     onTick: function () {
+//         console.log('test cron TICK');
+//         console.log('!!in cron, deviceId', deviceId);
+//         console.log('!!in cron, authToken', authToken);
+//     },
+//     start: false, 
+//     timeZone: 'America/Los_Angeles'
+// });
+
+
+let job; 
 
 //START / STOP cronjob
 router.post('/toggleCron', (req, res) => {
     console.log('in /api/devices/toggleCron, active? :', req.body.active);
-    
+    let deviceId = req.body.device_id;
+    let authToken = req.body.auth_token
     if (req.body.active === true) {
         console.log('turning on a new JOB');
+        //
+
+        function startNewCron (deviceId, authToken) {
+            job = new CronJob({
+                cronTime: '*/1 * * * * *',
+                onTick: function () {
+                    axios.get(`https://api.spark.io/v1/devices/${deviceId}/audioSpl?access_token=${authToken}`)
+                    .then((response) => {
+                        let timestamp = moment().format();
+                        let deviceId = response.data.coreInfo.deviceID;
+                        let splResult = response.data.result
+                        console.log('Current SPL: ',response.data.result);
+                
+                    //remove outlier data 
+                        if (splResult < 30) {
+                            splResult = null
+                        } else if (splResult > 125 ) {
+                            splResult = null
+                        }
+                
+                        //query to be sent to SQL db
+                    let queryText = `INSERT INTO spl_data (device_id, spl, stamp) 
+                                    VALUES ('${deviceId}', '${splResult}', '${timestamp}');`
+                        pool.query(queryText)
+                            .then((result) => {
+                                console.log('successful post to db');
+                            }) 
+                            .catch((err) => {
+                                console.log('error in post to db', err);
+                        })
+                    }).catch((err) => {
+                        console.log('things broke');
+                    })
+                },
+                start: false, 
+                timeZone: 'America/Los_Angeles'
+            });
+        }
+        startNewCron(deviceId, authToken)
+
+
+
         job.start(); 
         res.sendStatus(200); 
     }
