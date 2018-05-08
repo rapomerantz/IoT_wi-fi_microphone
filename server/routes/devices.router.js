@@ -5,6 +5,8 @@ const CronJob = require('cron').CronJob;
 const axios = require('axios');
 const moment = require('moment');
 
+
+
 //GET
 router.get('/', (req, res) => {
     console.log('/api/devices GET reached');
@@ -74,17 +76,17 @@ router.put('/', (req, res) => {
 
 //PUT to toggle activate sampling
 router.put('/toggleActive', (req, res) => {
-    // console.log('in /api/devices/toggleActive', req.body);
+    console.log('in /api/devices/toggleActive', req.body);
     const queryText = `UPDATE person_device
                         SET active = NOT active 
                         WHERE device_id = $1;`
     pool.query(queryText, [req.body.device_id])
     .then((result) => {
-        // console.log('successful PUT /api/devices/toggleActive');
+        console.log('successful PUT /api/devices/toggleActive');
         const checkActiveQuery = `SELECT active FROM person_device WHERE device_id = $1`
         pool.query(checkActiveQuery, [req.body.device_id])
         .then((result) => {
-            // console.log('checkActiveQuery:', result.rows);
+            console.log('checkActiveQuery:', result.rows);
             res.send(result.rows); 
         })
         .catch((err) => {
@@ -97,39 +99,29 @@ router.put('/toggleActive', (req, res) => {
     })
 })
 
+const job = new CronJob({
+    cronTime: '*/1 * * * * *',
+    onTick: function () {
+        console.log('test cron TICK');
+    },
+    start: false, 
+    timeZone: 'America/Los_Angeles'
+});
+
 
 //START / STOP cronjob
 router.post('/toggleCron', (req, res) => {
     console.log('in /api/devices/toggleCron, active? :', req.body);
-    if (req.body.active) {
-        
-        // Every 1 seconds makes an axios call to Photon
+    
+    if (req.body.active === true) {
         console.log('turning on a new JOB');
-        
-        let newCronJob = new CronJob('*/1 * * * * *', function() {
-            axios.get(`https://api.spark.io/v1/devices/${req.body.device_id}/audioSpl?access_token=${req.body.auth_token}`)
-            .then((response) => {
-                let timestamp = moment().format();
-                console.log('Current SPL: ',response.data.result);
-
-                //query to be sent to SQL db
-            let queryText = `INSERT INTO spl_data (device_id, spl, stamp) 
-                            VALUES ('${response.data.coreInfo.deviceID}', '${response.data.result}', '${timestamp}');`
-                pool.query(queryText)
-                    .then((result) => {
-                        console.log('successful post to db for device:', req.body.device_id);
-                    }) 
-                    .catch((err) => {
-                        console.log('error in post to db', err);
-                })
-            })
-            .catch((err) => {
-                console.log('in .catch');
-                // res.sendStatus(500); 
-            })
-            }, null, true, 'America/Los_Angeles');
-    } else {
-        newCronJob.stop(); 
+        job.start(); 
+        res.sendStatus(200); 
+    }
+    else if (req.body.active === false) {
+        console.log('turning OFF job');
+        job.stop(); 
+        res.sendStatus(200); 
     }
 })
 
