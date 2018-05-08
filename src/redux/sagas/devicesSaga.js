@@ -7,6 +7,7 @@ function* devicesSaga() {
     yield takeEvery ('FETCH_SPL', fetchSplSaga);
     yield takeEvery ('DELETE_DEVICE', deleteDeviceSaga); 
     yield takeEvery ('EDIT_DEVICE', editDeviceSaga); 
+    yield takeEvery ('ACTIVE_SWITCH', activateDeviceSaga); 
 }
 
 
@@ -36,18 +37,18 @@ function* addDeviceSaga(action) {
     }
 }
 
-function* fetchSplSaga(action) {
-    console.log('in fetchSplSaga', action.payload.selectedDevice);
-    try {                                                           //action.payload is number of spl data to be returned
-        const splResponse = yield call(axios.get, `/api/spl/?quantity=${action.payload.quantity}&device=${action.payload.selectedDevice}`) 
-        yield put({
-            type: 'SET_SPL',
-            payload: splResponse.data
-        });
+function* activateDeviceSaga(action) {
+    console.log('in activateDeviceSaga, payload:', action.payload);
+    try {
+        yield call (axios.put, `/api/devices/toggleActive`, action.payload)
+
     } catch (error) {
-        console.log('error in fetchSpl Saga', error);
+        console.log('error in activateDeviceSaga', error);           
     }
 }
+
+
+
 
 function* deleteDeviceSaga(action) {
     console.log('in deleteDeviceSaga, device id: ', action.payload);
@@ -66,6 +67,27 @@ function* editDeviceSaga(action) {
         yield put ({type: 'FETCH_DEVICES'}) //<-- triggers GET in fetchDevicesSaga above to repopulate devices        
     } catch (error) {
         console.log('error in editDeviceSaga', error); 
+    }
+}
+
+
+
+
+
+
+
+
+//THIS SHOULD PROBABLY HAVE ITS OWN SAGA IF I HAVE TIME
+function* fetchSplSaga(action) {
+    console.log('in fetchSplSaga', action.payload.selectedDevice);
+    try {                                                           //action.payload is number of spl data to be returned
+        const splResponse = yield call(axios.get, `/api/spl/?quantity=${action.payload.quantity}&device=${action.payload.selectedDevice}`) 
+        yield put({
+            type: 'SET_SPL',
+            payload: splResponse.data
+        });
+    } catch (error) {
+        console.log('error in fetchSpl Saga', error);
     }
 }
 

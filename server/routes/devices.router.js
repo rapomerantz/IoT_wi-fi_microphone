@@ -1,6 +1,9 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const CronJob = require('cron').CronJob;
+const axios = require('axios');
+const moment = require('moment');
 
 //GET
 router.get('/', (req, res) => {
@@ -67,5 +70,25 @@ router.put('/', (req, res) => {
         res.sendStatus(500); 
     })
 })
+
+
+//PUT to toggle activate sampling
+router.put('/toggleActive', (req, res) => {
+    console.log('in /api/devices/activate', req.body);
+    const queryText = `UPDATE person_device
+                        SET active = NOT active 
+                        WHERE device_id = $1;`
+    pool.query(queryText, [req.body.device_id])
+    .then((result) => {
+        console.log('successful PUT /api/devices/toggleActive,', result);
+    })
+    .catch((err)=> {
+        console.log('error in /api/devices/toggleActive', err);
+    })
+    
+})
+
+
+
 
 module.exports = router;
