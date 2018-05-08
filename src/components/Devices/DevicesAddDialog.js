@@ -6,7 +6,6 @@ import Button from 'material-ui/Button';
 import Dialog, {
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
   } from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
@@ -23,6 +22,7 @@ class DevicesEditDialog extends Component {
         deviceName: '',
         deviceId: '',
         authToken: '', 
+        errorMessage: false
       };
 
 //currying function to setState on change of input fields
@@ -34,25 +34,45 @@ handleTextChange = (event) => {
   
 handleAddSubmit = (event) => {
     event.preventDefault();
-    //pass this.state to addDeviceSaga    
-    this.props.dispatch({ 
-        type:'ADD_DEVICE',
-        payload: {
-        deviceName: this.state.deviceName,
-        deviceId: this.state.deviceId,
-        authToken: this.state.authToken
-        }
-    })
-    //reset input fields
-    this.setState({     
-        deviceName: '',
-        deviceId: '',
-        authToken: '',
-    })
-    this.props.handleClose(); 
+
+    if (this.state.deviceId.length > 0 && this.state.deviceName.length > 0 && this.state.authToken.length > 0 ){
+      //pass this.state to addDeviceSaga    
+      this.props.dispatch({ 
+          type:'ADD_DEVICE',
+          payload: {
+          deviceName: this.state.deviceName,
+          deviceId: this.state.deviceId,
+          authToken: this.state.authToken
+          }
+      })
+      //reset input fields
+      this.setState({     
+          deviceName: '',
+          deviceId: '',
+          authToken: '',
+          errorMessage: false
+      })
+      this.props.handleClose(); 
+      }
+    else {
+      this.setState({
+        errorMessage: true
+      })
     }
+  }
+
+
+
+
 
   render() {
+
+    let errorMessage;
+    if (this.state.errorMessage) {
+      errorMessage = <p>Check your inputs - all fields are required</p>
+    } 
+
+
     return (
       <div>
         <Dialog open={this.props.addDialog}
@@ -61,9 +81,6 @@ handleAddSubmit = (event) => {
 
           <DialogTitle id="form-dialog-title">Enter Device Details</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              Edit Device?
-            </DialogContentText>
             <TextField className="inputField"
                           id="deviceName"
                           label="Device Name"
@@ -82,9 +99,12 @@ handleAddSubmit = (event) => {
                           name="authToken"
                           value={this.state.authToken}
                           onChange={this.handleTextChange}/>
+
+              {errorMessage}   {/* appears if user doesn't enter a device ID */}
+
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.props.handleClose} color="primary">
+            <Button onClick={this.props.handleClose}>
               Cancel
             </Button>
             <Button onClick={this.handleAddSubmit} color="primary">

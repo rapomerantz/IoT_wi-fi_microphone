@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DevicesAddDialog from './DevicesAddDialog'
+import DevicesItem from './DevicesItem.js'
 
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { Button } from 'material-ui';
-import DevicesItem from './DevicesItem.js'
-import TextField from 'material-ui/TextField';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog';
 
 import './Devices.css'
 
