@@ -99,6 +99,7 @@ router.put('/toggleActive', (req, res) => {
     })
 })
 
+
 const job = new CronJob({
     cronTime: '*/1 * * * * *',
     onTick: function () {
@@ -108,10 +109,9 @@ const job = new CronJob({
     timeZone: 'America/Los_Angeles'
 });
 
-
 //START / STOP cronjob
 router.post('/toggleCron', (req, res) => {
-    console.log('in /api/devices/toggleCron, active? :', req.body);
+    console.log('in /api/devices/toggleCron, active? :', req.body.active);
     
     if (req.body.active === true) {
         console.log('turning on a new JOB');

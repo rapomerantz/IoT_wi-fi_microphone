@@ -47,11 +47,15 @@ function* activateDeviceSaga(action) {
 
         if (toggleActiveResponse.data[0].active) {
             console.log('gonna start a new JOB');
-            yield call (axios.post, `/api/devices/toggleCron`, {active: true})
+            yield call (axios.post, `/api/devices/toggleCron`, {device_id: action.payload.device_id, 
+                                                                auth_token: action.payload.auth_token,
+                                                                active: true})
         } 
         else {
             console.log('gonna turn off the JOB');
-            yield call (axios.post, `/api/devices/toggleCron`, {active: false})
+            yield call (axios.post, `/api/devices/toggleCron`, {device_id: action.payload.device_id, 
+                                                                auth_token: action.payload.auth_token,
+                                                                active: false})
         }
     } catch (error) {
         console.log('error in activateDeviceSaga', error);           
