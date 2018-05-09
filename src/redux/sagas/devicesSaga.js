@@ -7,7 +7,7 @@ function* devicesSaga() {
     yield takeEvery ('FETCH_SPL', fetchSplSaga);
     yield takeEvery ('DELETE_DEVICE', deleteDeviceSaga); 
     yield takeEvery ('EDIT_DEVICE', editDeviceSaga); 
-    yield takeEvery ('ACTIVE_SWITCH', activateDeviceSaga); 
+    yield takeEvery ('TOGGLE_ACTIVE', activateDeviceSaga); 
 }
 
 

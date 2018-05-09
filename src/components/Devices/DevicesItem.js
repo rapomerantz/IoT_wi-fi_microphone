@@ -27,17 +27,18 @@ class DevicesItem extends Component {
       expanded: false,
       deleteDialog: false,
       editDialog: false,
-      checkedA: false, //<-- 'active' switch
+      activeSampling: false,
     };
 
-//handle switch
-handleChange = name => event => {
-  this.setState({ [name]: event.target.checked });
+handleActiveButton = () => {
+  this.setState({
+    activeSampling: !this.state.activeSampling
+  })
   this.props.dispatch({
-    type: 'ACTIVE_SWITCH', 
+    type: 'TOGGLE_ACTIVE', 
     payload: this.props.device,
   })
-};
+}
 
 
 //handle card expand
@@ -75,11 +76,19 @@ handleClose = () => {
 
   render() {
 
+    let activeClassName = '';
+    let activateButtonText = 'Activate'
+    if (this.state.activeSampling) {
+      activeClassName += 'activeDevice';
+      activateButtonText = 'Deactivate'
+    }
+
+
     return (
       <div>
 
-            <Card className="devicePaper" >
-              <CardContent>
+            <Card className='devicePaper'>
+              <CardContent className={activeClassName}>
                 <Grid zeroMinWidth container spacing={16}>
                     <Grid item xs={2}>
                       <div className="deviceMore">
@@ -106,21 +115,15 @@ handleClose = () => {
 
               {/* collapse content: more device info */}
               <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                  <CardContent>
+                  <CardContent className={activeClassName}>
 
-                    {/* Active switch */}
-                  <FormControlLabel
-                      control={
-                        <Switch
-                          checked={this.state.checkedA}
-                          onChange={this.handleChange('checkedA')}
-                          value="checkedA"
-                          color="primary"
-                        />
-                      }
-                      label="Active Sampling"
-                    />
-
+                {/* Activate Button */}
+                    <Button onClick={this.handleActiveButton} 
+                            variant="raised" 
+                            color="primary" >
+                            {activateButtonText}
+                    </Button>
+                    
                       <br/>
                       <i>Id: <br/> {this.props.device.device_id}</i>
                       <br/>
