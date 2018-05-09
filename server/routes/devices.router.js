@@ -112,7 +112,7 @@ router.put('/toggleActive', (req, res) => {
 // });
 
 
-let job; 
+let job = {}; 
 
 //START / STOP cronjob
 router.post('/toggleCron', (req, res) => {
@@ -126,7 +126,7 @@ router.post('/toggleCron', (req, res) => {
 //this CronJob will be stopped if the device's `select` boolean = false 
 
         function startNewCron (deviceId, authToken) {
-            job = new CronJob({
+            job[deviceId] = new CronJob({
                 cronTime: '*/1 * * * * *',
                 onTick: function () {
                     axios.get(`https://api.spark.io/v1/devices/${deviceId}/audioSpl?access_token=${authToken}`)
