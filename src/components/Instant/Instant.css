@@ -13,6 +13,7 @@
     height: 400px;
     margin: 20px auto;
     padding: 25px;
+    padding-top: 30px; 
     border-radius: 20px;
 }
 
@@ -23,17 +24,17 @@
     width: 100%;  
     text-align: center; 
     border-radius: 5px; 
-    margin-bottom: 10%; 
+    margin-bottom: 15%; 
 }
 
 #instantText {
     margin-top: 30px;
-    /* margin-left: 30px; */
     font-size: 95px; 
 }
 
 #instantWarningBox {
     text-align: center;
+    margin-bottom: 5%; 
 }
 
 #instantWarningText{
@@ -42,7 +43,7 @@
 
 
 
-#infoIcon {
+#instantInfoIcon {
     margin: 0px; 
     margin-right: 20%; 
     float: right; 
@@ -65,7 +66,7 @@
 .warningYellow {
     background-color: cornsilk; 
     border: 1px rgba(128, 128, 128, 0.18) solid;  
-    height: 50px;
+    height: 60px;
     width: 100%;  
     
 }
@@ -79,7 +80,7 @@
 
 
 
-select {
+.instantSelect {
     /* General styling */
     height: 30px;
     width: 100px;

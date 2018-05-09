@@ -4,14 +4,16 @@ const router = express.Router();
 const CronJob = require('cron').CronJob;
 const axios = require('axios');
 const moment = require('moment');
+const {rejectUnauthenticated} = require('../modules/authentication-middleware')
 
 
 
-//GET
-router.get('/', (req, res) => {
+//GET user's devices
+router.get('/', rejectUnauthenticated, (req, res) => {
+
     console.log('/api/devices GET reached');
     const queryText = `SELECT * FROM person_device WHERE person_id = $1;` //<-- user's id goes here
-    pool.query(queryText, [req.user.id])
+    pool.query(queryText, [req.user.id]) //LIKE THIS PLZ
     .then((result) => {
         console.log('successful GET /api/devices');
         res.send(result.rows); 
@@ -22,8 +24,8 @@ router.get('/', (req, res) => {
     })
 });
 
-//POST
-router.post('/', (req, res) => {
+//POST new device
+router.post('/', rejectUnauthenticated, (req, res) => {
     let body = req.body;
     let user = req.user
     console.log('/api/devices POST', req.body);
@@ -39,8 +41,8 @@ router.post('/', (req, res) => {
     })
 });
 
-//DELETE
-router.delete('/:id', (req, res) => {
+//DELETE selected device
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     let deviceId = req.params.id;
     console.log(deviceId);
     const queryText = `DELETE FROM person_device WHERE device_id = $1;`
@@ -55,8 +57,8 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-//PUT
-router.put('/', (req, res) => {
+//PUT edit device info
+router.put('/', rejectUnauthenticated, (req, res) => {
     let body = req.body;
     console.log(body);
     const queryText = `UPDATE person_device
@@ -75,7 +77,7 @@ router.put('/', (req, res) => {
 
 
 //PUT to toggle activate sampling
-router.put('/toggleActive', (req, res) => {
+router.put('/toggleActive', rejectUnauthenticated, (req, res) => {
     console.log('in /api/devices/toggleActive', req.body);
     const queryText = `UPDATE person_device
                         SET active = NOT active 
@@ -107,7 +109,7 @@ let cronJobsObject = {};
 
 
 //CREATE or STOP cronjob
-router.post('/toggleCron', (req, res) => {
+router.post('/toggleCron', rejectUnauthenticated, (req, res) => {
     console.log('in /api/devices/toggleCron, active? :', req.body.active);
     let deviceId = req.body.device_id;
     let authToken = req.body.auth_token

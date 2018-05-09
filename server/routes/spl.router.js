@@ -2,11 +2,12 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const photonCron = require('../modules/photonNodeCron')
+const {rejectUnauthenticated} = require('../modules/authentication-middleware')
 
-/**
- * GET route template
- */
-router.get('/', (req, res) => {
+
+
+//GET device's SPL data
+router.get('/', rejectUnauthenticated, (req, res) => {
     // console.log('in GET /api/spl, rec.query.quantity:', req.query);
     let quantity = req.query.quantity;
     let selectedDevice = req.query.device;

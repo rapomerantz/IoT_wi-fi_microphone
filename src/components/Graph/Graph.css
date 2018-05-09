@@ -13,33 +13,44 @@
     height: 440px;
     margin: 20px auto;
     padding: 5px;
-    border-radius: 20px;
-    
+    border-radius: 20px;   
 }
 
-.graphChart {
-    /* background-color: rgb(252, 248, 248);
-    background-color: white;
-    border: 1px solid rgba(128, 128, 128, 0.207); 
-    width: 70%;
-    height: 400px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 20px; */
+
+#graphInfoIcon {
+    margin: 0px; 
+    margin-right: 10%; 
+    margin-top: -8%; 
+    float: right; 
+    padding: 0px; 
+    width: 10px;
+    height: 10px; 
 }
 
-.warningWire {
-    background-color: cornsilk; 
-    border: 1px grey solid; 
-    height: 50px;
-    width: 250px; 
-    /* margin-left: 75px; */
+#graphOptionsDrawer {
 }
 
-.buttonWire {
-    background-color: forestgreen; 
-    border: 1px grey solid; 
-    height: 50px;
-    width: 200px; 
-    /* margin-left: 100px; */
-}
+
+
+
+.graphSelect {
+    /* General styling */
+    font-family: 'Roboto Mono', monospace;
+    font-size: 11px;
+    height: 40px;
+    width: 100%;
+    border-radius: 0px;
+    padding-left: 45px;
+    display: inline;
+    border: 1px solid rgba(165, 165, 165, 0.399); 
+  
+    /* Removes the default <select> styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  
+    /* Positions background arrow image */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC');
+    background-repeat: no-repeat;
+    background-position: 80% 50%;
+  }

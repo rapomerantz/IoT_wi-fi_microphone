@@ -7,7 +7,6 @@ import InstantSelectOption from './InstantSelectOption.js'
 import InstantWarning from './InstantWarning.js'
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Info from '@material-ui/icons/Info'
-
 import Icon from 'material-ui/Icon';
 import IconButton from 'material-ui/IconButton';
 
@@ -113,7 +112,7 @@ tick = () => {
 
 
               <div id="instantTextBox">
-                <div id="infoIcon">
+                <div id="instantInfoIcon">
                   <IconButton >
                     <Info/>
                   </IconButton>
@@ -127,7 +126,7 @@ tick = () => {
 
 
               <CardActions>
-                  <select  onChange={this.handleDeviceSelect}>
+                  <select className="instantSelect"  onChange={this.handleDeviceSelect}>
                     {selectOptions}
                   </select>
                   <FormControlLabel
