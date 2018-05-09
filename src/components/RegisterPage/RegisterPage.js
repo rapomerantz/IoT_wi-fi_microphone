@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
 
 class RegisterPage extends Component {
   constructor(props) {
@@ -73,36 +75,45 @@ class RegisterPage extends Component {
       <div>
         {this.renderAlert()}
         <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
-          <div>
+          <h1>Is It Loud In Here?</h1>
+          <h2>Register</h2>
+          <div className="loginTextField">
             <label htmlFor="username">
-              Username:
-              <input
+              <TextField
                 type="text"
                 name="username"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
+                label="Username"
               />
             </label>
           </div>
-          <div>
+          <div className="loginTextField">
             <label htmlFor="password">
-              Password:
-              <input
+              <TextField
                 type="password"
                 name="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
+                label="Password"
               />
             </label>
           </div>
-          <div>
-            <input
-              type="submit"
-              name="submit"
-              value="Register"
-            />
-            <Link to="/home">Cancel</Link>
+          <div className="loginButton" >
+              <Button type="submit" 
+                      name="submit" 
+                      value="Log In"
+                      fullWidth={true}
+                      >
+                      Submit
+              </Button>
+            </div>
+            <div className="loginButton">
+              <Button component={Link} 
+                      to="/home"
+                      fullWidth={true}>
+                Back
+              </Button>
           </div>
         </form>
       </div>

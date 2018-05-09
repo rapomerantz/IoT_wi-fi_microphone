@@ -4,8 +4,10 @@ h1 {
 
 
 .devicePaper {
-    width: 100%;
+    width: 90%;
     margin-top: 25px; 
+    margin: 20px auto;
+    border-radius: 10px; 
 }
 
 .activeDevice {

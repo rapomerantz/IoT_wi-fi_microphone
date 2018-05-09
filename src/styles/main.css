@@ -1,26 +1,43 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto Mono', monospace;
     margin: 0px; 
     padding: 0px; 
+    background-color: #b6edff;
+    /* background-color: whitesmoke */
 }
+
+h2 {
+    letter-spacing: 6px;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 3px; 
+}
+
 
 form {
-    background-color: #dbd5d5;
-    width: 80%;
-    height: 250px;
+    /* background-color: rgba(255, 255, 255, 0.337); */
+    background-color: rgb(252, 248, 248);
+    border: 1px solid rgba(128, 128, 128, 0.207); 
+    width: 70%;
+    height: 400px;
     margin: 20px auto;
     padding: 25px;
-    border-radius: 2px;
+    border-radius: 20px;
 }
 
-input {
-    margin: 5px;
-    margin-bottom: 10px;
+.loginTextField{
+    margin-left: 30px;
+    margin-bottom: 10px;  
 }
 
-input[type="submit"] {
-    margin: 10px;
+.loginButton {
+    margin-top: 18px; 
+    margin-bottom: 5px; 
+    border: 1px solid rgba(128, 128, 128, 0.207); 
+    border-radius: 20px;
+    background-color: #ffffff74;
 }
+
 
 .message {
     padding: 10px 0;

@@ -5,6 +5,14 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { Switch, FormControlLabel, } from 'material-ui'; 
 import InstantSelectOption from './InstantSelectOption.js'
 import InstantWarning from './InstantWarning.js'
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Info from '@material-ui/icons/Info'
+
+import Icon from 'material-ui/Icon';
+import IconButton from 'material-ui/IconButton';
+
+
+
 import './Instant.css'
 
 //connect to redux
@@ -97,34 +105,44 @@ tick = () => {
 
     return (
         <div id="instantContainer">
-          <div id="instantContent">
-          
-          <select onChange={this.handleDeviceSelect}>
-            {selectOptions}
-          </select>
-
-          <FormControlLabel
-            control={
-              <Switch
-                checked={this.state.switch}
-                onChange={this.handleSwitch('switch')}
-                value="switch"
-              />
-            }
-            label="Connect"
-          />
-
-            <div id="instantBox">
-              <p id="instantText">{newSpl}</p>
-            </div>
-            
-            <div id="instantWarningBox">
-              <InstantWarning newSpl={newSpl}/>
-            </div>
+          <Card id="instantContent">
+            <CardContent>
 
 
-            
-          </div>
+
+
+
+              <div id="instantTextBox">
+                <div id="infoIcon">
+                  <IconButton >
+                    <Info/>
+                  </IconButton>
+                </div>
+                <p id="instantText">{newSpl}</p>
+              </div>
+              
+              <div id="instantWarningBox">
+                <InstantWarning newSpl={newSpl}/>
+              </div>
+
+
+              <CardActions>
+                  <select  onChange={this.handleDeviceSelect}>
+                    {selectOptions}
+                  </select>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={this.state.switch}
+                        onChange={this.handleSwitch('switch')}
+                        value="switch"
+                      />
+                    }
+                  />
+              </CardActions>
+
+            </CardContent>
+          </Card>
         </div>
     );
   }
