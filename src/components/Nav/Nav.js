@@ -38,6 +38,10 @@ class Nav extends Component {
     // this.props.history.push('home');
   }
 
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
 
   toggleDrawer = (side, open) => () => {
     this.setState({

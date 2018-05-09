@@ -5,6 +5,8 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { Switch, FormControlLabel, } from 'material-ui'; 
 import InstantSelectOption from './InstantSelectOption.js'
 import InstantWarning from './InstantWarning.js'
+import InfoDialog from './InfoDialog.js'
+
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Info from '@material-ui/icons/Info'
 import Icon from 'material-ui/Icon';
@@ -26,6 +28,7 @@ class Instant extends Component {
       this.state = {
           selectedDevice: '3a0027001647343339383037', //<-- auto-select my device, change this later
           switch: true,
+          infoDialog: false
       };
     }
 
@@ -89,6 +92,21 @@ tick = () => {
     this.setState({ [name]: event.target.checked });  
   };
 
+//open InfoDialog
+  handleInfoOpen = () => {
+    console.log('open InfoDialog');
+    this.setState({
+      infoDialog: true,
+    })
+  }
+
+  handleClose = () => {
+    console.log('close InfoDialog');
+    this.setState({
+      infoDialog: false,
+    })
+  }
+
   render() {
 
 //looping through devices & returning <option> elemnts to populate <select>
@@ -105,26 +123,25 @@ tick = () => {
     return (
         <div id="instantContainer">
           <Card id="instantContent">
+
+          <InfoDialog infoDialog={this.state.infoDialog}
+                      handleClose={this.handleClose}/>
+
             <CardContent>
-
-
-
-
-
               <div id="instantTextBox">
+
                 <div id="instantInfoIcon">
-                  <IconButton >
+                  <IconButton onClick={this.handleInfoOpen} >
                     <Info/>
                   </IconButton>
                 </div>
+
                 <p id="instantText">{newSpl}</p>
               </div>
               
               <div id="instantWarningBox">
                 <InstantWarning newSpl={newSpl}/>
               </div>
-
-
               <CardActions>
                   <select className="instantSelect"  onChange={this.handleDeviceSelect}>
                     {selectOptions}
@@ -139,7 +156,6 @@ tick = () => {
                     }
                   />
               </CardActions>
-
             </CardContent>
           </Card>
         </div>

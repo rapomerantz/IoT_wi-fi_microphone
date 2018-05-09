@@ -55,7 +55,6 @@ class Devices extends Component {
     this.setState({
       addDialog: false
     })
-    
   }
 
 
