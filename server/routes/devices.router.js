@@ -100,32 +100,25 @@ router.put('/toggleActive', (req, res) => {
 })
 
 
-// const job = new CronJob({
-//     cronTime: '*/1 * * * * *',
-//     onTick: function () {
-//         console.log('test cron TICK');
-//         console.log('!!in cron, deviceId', deviceId);
-//         console.log('!!in cron, authToken', authToken);
-//     },
-//     start: false, 
-//     timeZone: 'America/Los_Angeles'
-// });
 
 
+//this object will hold all cronjobs as they're created {deviceId: new cronJob}
 let cronJobsObject = {}; 
 
-//START / STOP cronjob
+
+//CREATE or STOP cronjob
 router.post('/toggleCron', (req, res) => {
     console.log('in /api/devices/toggleCron, active? :', req.body.active);
     let deviceId = req.body.device_id;
     let authToken = req.body.auth_token
+
+//if device is active, start new cron job. if it's inactive, end cronjob
     if (req.body.active === true) {
         console.log('turning on a new JOB');
 
-//this function redefines global variable `job` as a new CronJob with selected devices' credentials
-//this CronJob will be stopped if the device's `select` boolean = false 
 
-        function startNewCron (deviceId, authToken) {
+// when called this function creates a new key/value pair in cronJobsObject
+        function createNewCronJob (deviceId, authToken) {
             cronJobsObject[deviceId] = new CronJob({
                 cronTime: '*/1 * * * * *',
                 onTick: function () {
@@ -142,7 +135,7 @@ router.post('/toggleCron', (req, res) => {
                             splResult = null
                         }
                 
-                        //query to be sent to SQL db
+                    //query to be sent to SQL db
                     let queryText = `INSERT INTO spl_data (device_id, spl, stamp) 
                                     VALUES ('${deviceId}', '${splResult}', '${timestamp}');`
                         pool.query(queryText)
@@ -161,16 +154,18 @@ router.post('/toggleCron', (req, res) => {
             });
         }
 
+//call create new CronJob
+        createNewCronJob(deviceId, authToken)
         
-//call CronJob
-        startNewCron(deviceId, authToken)
-        
-
-//start CronJob
+//start new CronJob
         cronJobsObject[deviceId].start(); 
+
+//current contents of cronJobsObject
         console.log('cronJobsObject:', cronJobsObject);
         res.sendStatus(200); 
     }
+
+//turn off cronjob by deviceId 
     else if (req.body.active === false) {
         console.log('turning OFF job', deviceId);
         cronJobsObject[deviceId].stop(); 
