@@ -34,7 +34,8 @@ app.use('/api/spl', splRouter);
 app.use(express.static('build'));
 
 //use NodeCron 
-app.use('/start', cronQuery); 
+// app.use('/', cronQuery); 
+
 
 // App Set //
 const PORT = process.env.PORT || 5000;

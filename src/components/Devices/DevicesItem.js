@@ -9,6 +9,11 @@ import {Button, Grid } from 'material-ui';
 import Card, { CardContent } from 'material-ui/Card';
 import Collapse from 'material-ui/transitions/Collapse';
 import Icon from 'material-ui/Icon';
+import Switch from 'material-ui/Switch';
+import { FormControlLabel } from 'material-ui/Form';
+
+
+
 
 
 //connect to redux
@@ -22,7 +27,17 @@ class DevicesItem extends Component {
       expanded: false,
       deleteDialog: false,
       editDialog: false,
+      checkedA: false, //<-- 'active' switch
     };
+
+//handle switch
+handleChange = name => event => {
+  this.setState({ [name]: event.target.checked });
+  this.props.dispatch({
+    type: 'ACTIVE_SWITCH', 
+    payload: this.props.device,
+  })
+};
 
 
 //handle card expand
@@ -92,6 +107,21 @@ handleClose = () => {
               {/* collapse content: more device info */}
               <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                   <CardContent>
+
+                    {/* Active switch */}
+                  <FormControlLabel
+                      control={
+                        <Switch
+                          checked={this.state.checkedA}
+                          onChange={this.handleChange('checkedA')}
+                          value="checkedA"
+                          color="primary"
+                        />
+                      }
+                      label="Active Sampling"
+                    />
+
+                      <br/>
                       <i>Id: <br/> {this.props.device.device_id}</i>
                       <br/>
                       <i>Auth Token: <br/> {this.props.device.auth_token}</i>
