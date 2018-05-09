@@ -48,7 +48,7 @@ let chartOptions = {
         scaleStartValue: 55, 
         scaleStepWidth: 2, 
         scaleSteps: 15,
-        bezierCurve : false,
+        bezierCurve : true,
         pointDot : true,
         pointDotStrokeWidth : 0.5,
         datasetFill : false,

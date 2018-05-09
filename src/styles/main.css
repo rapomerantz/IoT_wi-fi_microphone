@@ -3,6 +3,7 @@ body {
     margin: 0px; 
     padding: 0px; 
     background-color: #b6edff;
+    /* background-color: whitesmoke */
 }
 
 h2 {
@@ -14,7 +15,8 @@ h2 {
 
 
 form {
-    background-color: rgba(255, 255, 255, 0.337);
+    /* background-color: rgba(255, 255, 255, 0.337); */
+    background-color: rgb(252, 248, 248);
     border: 1px solid rgba(128, 128, 128, 0.207); 
     width: 70%;
     height: 400px;

@@ -112,7 +112,7 @@ class RegisterPage extends Component {
               <Button component={Link} 
                       to="/home"
                       fullWidth={true}>
-                Home
+                Back
               </Button>
           </div>
         </form>

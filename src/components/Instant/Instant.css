@@ -1,23 +1,34 @@
 #instantContainer {
     margin-bottom: 40px; 
     font-family: 'Roboto Mono', monospace;
-}
-#instantContent {
-    padding: 40px; 
-    width: 80%; 
-    margin-left: 5%; 
+    background-color: #b6edff;
 }
 
-#instantBox {
-    /* background-color: whitesmoke;  */
-    /* border: 1px grey solid;  */
-    /* height: 200px;
-    width: 200px;  */
-    /* text-align: center; */
+
+#instantContent {
+    background-color: rgb(252, 248, 248);
+    /* background-color: white;  */
+    border: 1px solid rgba(128, 128, 128, 0.207); 
+    width: 70%;
+    height: 400px;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 20px;
+}
+
+#instantTextBox {
+    background-color: whitesmoke; 
+    border: 1px rgba(128, 128, 128, 0.18) solid;  
+    height: 200px;
+    width: 100%;  
+    text-align: center; 
+    border-radius: 5px; 
+    margin-bottom: 10%; 
 }
 
 #instantText {
     margin-top: 30px;
+    /* margin-left: 30px; */
     font-size: 95px; 
 }
 
@@ -30,25 +41,63 @@
 }
 
 
+
+#infoIcon {
+    margin: 0px; 
+    margin-right: 20%; 
+    float: right; 
+    padding: 0px; 
+    width: 10px;
+    height: 10px; 
+}
+
+
+
+
+/* changing colors based on SPL reading */
 .warningGreen {
     background-color: forestgreen; 
-    border: 1px grey solid; 
+    border: 1px rgba(128, 128, 128, 0.18) solid;  
     height: 50px;
-    width: 200px; 
+    width: 100%;  
 }
 
 .warningYellow {
     background-color: cornsilk; 
-    border: 1px grey solid; 
+    border: 1px rgba(128, 128, 128, 0.18) solid;  
     height: 50px;
-    width: 200px;    
+    width: 100%;  
+    
 }
 
 .warningRed {
     background-color: tomato; 
-    border: 1px grey solid; 
+    border: 1px rgba(128, 128, 128, 0.18) solid;  
     height: 50px;
-    width: 200px; 
-    
+    width: 100%;  
 }
+
+
+
+select {
+    /* General styling */
+    height: 30px;
+    width: 100px;
+    border-radius: 0;
+    padding-left: 10px;
+  
+    /* Removes the default <select> styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  
+    /* Positions background arrow image */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAh0lEQVQ4T93TMQrCUAzG8V9x8QziiYSuXdzFC7h4AcELOPQAdXYovZCHEATlgQV5GFTe1ozJlz/kS1IpjKqw3wQBVyy++JI0y1GTe7DCBbMAckeNIQKk/BanALBB+16LtnDELoMcsM/BESDlz2heDR3WePwKSLo5eoxz3z6NNcFD+vu3ij14Aqz/DxGbKB7CAAAAAElFTkSuQmCC');
+    background-repeat: no-repeat;
+    background-position: 75px center;
+  }
+
+
+
+
 
