@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import DevicesAddDialog from './DevicesAddDialog'
+import DevicesItem from './DevicesItem.js'
 
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { Button } from 'material-ui';
-import DevicesItem from './DevicesItem.js'
+
 import './Devices.css'
+
 
 
 //connect to redux
@@ -15,6 +17,11 @@ const mapStateToProps = state => ({
 });
 
 class Devices extends Component {
+  state = {
+    addDialog: false
+  }
+
+
 //fetch user info
   componentDidMount() {
     this.props.dispatch({type: USER_ACTIONS.FETCH_USER});
@@ -36,6 +43,22 @@ class Devices extends Component {
     });
   }
 
+  handleAddOpen = () => {
+    console.log('open add device');
+    this.setState({
+      addDialog: true
+    })
+  }
+
+  handleClose = () => {
+    console.log('close add device');
+    this.setState({
+      addDialog: false
+    })
+    
+  }
+
+
   render() {
     let devicesReducer = this.props.state.devicesReducer.devicesReducer; 
 
@@ -55,11 +78,17 @@ class Devices extends Component {
         <Button id="addDeviceLink" 
                 variant="raised" 
                 fullWidth={true} 
-                component={Link} to="/addDevice">
+                onClick={this.handleAddOpen}>
           Add Device
         </Button>
 
           {devicesItemArray}
+
+
+
+        <DevicesAddDialog // device={this.props.device} //<-- passing all of device thru to edit dialog
+                            addDialog={this.state.addDialog} // <-- passing thru open/close boolean
+                            handleClose={this.handleClose}/> 
 
       </div>
     );
