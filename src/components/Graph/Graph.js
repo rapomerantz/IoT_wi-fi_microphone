@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { Switch, FormControlLabel } from 'material-ui';
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+
 import './Graph.css'
 import Chart from './Chart.js'
 import GraphSelectOptions from './GraphSelectOptions.js'
@@ -92,24 +94,8 @@ handleSwitch = name => event => {
   this.setState({ [name]: event.target.checked });  
 };
 
-//START Menu handlers NOT CURRENTLY BEING USED
-  closeDeviceMenu = () => {
-    this.setState({ anchorElDevice: null });
-  };
-  openDeviceMenu = event => {
-    this.setState({ anchorElDevice: event.currentTarget });
-  };
-  closeTimeMenu = () => {
-    this.setState({ anchorElTime: null });
-  };
-  openTimeMenu = event => {
-    this.setState({ anchorElTime: event.currentTarget });
-  };
-//END Menu handlers NOT CURRENTLY BEING USED
-
   render() {
-    // const { anchorElDevice } = this.state;
-    // const { anchorElTime } = this.state;
+
 
   //looping through devices & returning <option> elemnts to populate <select>
   let selectItemsArray = this.props.state.devicesReducer.devicesReducer && this.props.state.devicesReducer.devicesReducer; 
@@ -120,69 +106,48 @@ handleSwitch = name => event => {
 
 
     return (
-      <div>
-        <div id="graphContainer">
+      <div id="graphContainer">
 
-{/* start UI menus NOT CURRENTLY BEING USED */}
-          {/* <Menu id="deviceSelect"
-                anchorEl = {anchorElDevice}
-                open={Boolean(anchorElDevice)}
-                onClose={this.closeDeviceMenu}>
-              <MenuItem onClick={this.closeDeviceMenu}>Device</MenuItem>
-              <MenuItem onClick={this.closeDeviceMenu}>Device</MenuItem>
-              <MenuItem onClick={this.closeDeviceMenu}>Device</MenuItem>
-          </Menu>
-          <Menu id="timeSelect"
-                anchorEl = {anchorElTime}
-                open={Boolean(anchorElTime)}
-                onClose={this.closeTimeMenu}>
-              <MenuItem onClick={this.closeTimeMenu}>Time</MenuItem>
-              <MenuItem onClick={this.closeTimeMenu}>Time</MenuItem>
-              <MenuItem onClick={this.closeTimeMenu}>Time</MenuItem>
-          </Menu> */}
-{/* end UI menus NOT CURRENTLY BEING USED */}
+        <Card id="graphContent">
+          <CardContent>
 
-          <div id="graphContent">
+            <div className="graphChart">
+                <Chart/>   
+              </div>
 
-            {/* Anchor Element for Menu NOT CURRENTLY BEING USED */}
-            {/* <Button variant="raised" color="primary" className="buttonWire" onClick={this.openDeviceMenu}> Select Device </Button>
-            <Button variant="raised" color="primary" className="buttonWire" onClick={this.openTimeMenu}> Select Timeframe </Button> */}
-
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={this.state.switch}
-                  onChange={this.handleSwitch('switch')}
-                  value="switch"
+            <CardActions>
+             
+              {/* Select time */}
+              <select onChange={this.handleTimeSelect}>
+                <option value="12">1 Minute</option>
+                <option value="24">2 Minutes</option>
+                <option value="60">5 Minutes</option>
+                <option value="120">10 Minutes</option>
+                <option value="720">1 Hour</option>
+              </select>
+              {/* Select device */}
+              <select onChange={this.handleDeviceSelect}>
+                {selectOptions}
+              </select>
+               <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.switch}
+                    onChange={this.handleSwitch('switch')}
+                    value="switch"
+                  />
+                }
                 />
-              }
-              label="<- Auto Update"
-              />
+            </CardActions>
 
-            {/* Select time */}
-            <select onChange={this.handleTimeSelect}>
-              <option value="12">1 Minute</option>
-              <option value="24">2 Minutes</option>
-              <option value="60">5 Minutes</option>
-              <option value="120">10 Minutes</option>
-              <option value="720">1 Hour</option>
-            </select>
-
-            {/* Select device */}
-            <select onChange={this.handleDeviceSelect}>
-              {selectOptions}
-            </select>
               
 
-            <div className="graphWire">
-              <Chart/>   
-            </div>
+              {/* <Button variant="raised" color="primary" className="buttonWire">See Instant</Button> */}
+          </CardContent>
+        </Card>
 
-            {/* <Button variant="raised" color="primary" className="buttonWire">See Instant</Button> */}
-          </div>
-
-        </div>
       </div>
+
     );
   }
 }
