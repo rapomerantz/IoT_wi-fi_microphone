@@ -43,11 +43,35 @@ render() {
 };
 //end data for chart
 
+//setting chart range
+let chartRange = this.props.chartRange;
+let scaleStart = 55;
+let scaleSteps = 10;
+console.log('chart chartRange', chartRange);
+
+    if (chartRange === 'low') {
+        let scaleStart = 40;
+        let scaleSteps = 10;
+    } 
+    else if (chartRange === 'medium') {
+        let scaleStart = 50;
+        let scaleSteps = 10;
+    }
+    else if (chartRange === 'high'){
+        let scaleStart = 60;
+        let scaleSteps = 15;
+    }
+
+
+
+
+
+
 let chartOptions = {
         scaleOverride: true, 
-        scaleStartValue: 55, 
+        scaleStartValue: scaleStart, 
         scaleStepWidth: 2, 
-        scaleSteps: 10,
+        scaleSteps: scaleSteps,
         bezierCurve : true,
         pointDot : true,
         pointDotStrokeWidth : 0.5,
@@ -56,7 +80,7 @@ let chartOptions = {
   
 
   return (
-      <LineChart data={chartData} options={chartOptions} height="350" width="250"/>            
+      <LineChart data={chartData} options={chartOptions} height="370" width="250"/>            
   );
 }
 }

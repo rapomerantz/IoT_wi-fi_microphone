@@ -92,14 +92,14 @@ tick = () => {
     this.setState({ [name]: event.target.checked });  
   };
 
-//open InfoDialog
+//open infoDialog
   handleInfoOpen = () => {
     console.log('open InfoDialog');
     this.setState({
       infoDialog: true,
     })
   }
-
+//close infoDialog
   handleClose = () => {
     console.log('close InfoDialog');
     this.setState({

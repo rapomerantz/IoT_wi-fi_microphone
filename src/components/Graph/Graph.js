@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import InfoDialog from '../Instant/InfoDialog.js'
+
 
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { Switch, FormControlLabel } from 'material-ui';
@@ -30,8 +32,10 @@ class Graph extends Component {
       this.state = {
         selectedDevice: '3a0027001647343339383037',
         timeSelection: 12,
-        switch: true,
+        switch: false,
         top: false,
+        infoDialog: false,
+        chartRange: 'low',
       };
     }
 
@@ -76,7 +80,7 @@ fetchSpl = () => {
     type:'FETCH_SPL',
     payload: {
       quantity: this.state.timeSelection,
-      selectedDevice: this.state.selectedDevice
+      selectedDevice: this.state.selectedDevice,
     }
   })
 }
@@ -98,6 +102,13 @@ handleDeviceSelect = (event) => {
   this.fetchSpl(); 
 }
 
+handleRangeSelect = (event) => {
+  this.setState({
+    chartRange: event.target.value
+  })
+  console.log('chartRange: ', this.state.chartRange);
+}
+
 //switch toggles auto update 
 handleSwitch = name => event => {
   this.setState({ [name]: event.target.checked });  
@@ -108,6 +119,21 @@ toggleDrawer = (side, open) => () => {
     [side]: open,
   });
 };
+
+//open infoDialog
+handleInfoOpen = () => {
+  console.log('open InfoDialog');
+  this.setState({
+    infoDialog: true,
+  })
+}
+//close infoDialog
+handleClose = () => {
+  console.log('close InfoDialog');
+  this.setState({
+    infoDialog: false,
+  })
+}
 
 
 
@@ -140,10 +166,10 @@ toggleDrawer = (side, open) => () => {
           {selectOptions}
         </select>
 
-        <select className="graphSelect">
-          <option value="12">Small</option>
-          <option value="24">Medium</option>
-          <option value="60">Large</option>
+        <select onChange={this.handleRangeSelect} className="graphSelect">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
         </select>
 
     </Card>
@@ -153,18 +179,17 @@ toggleDrawer = (side, open) => () => {
     return (
       <div id="graphContainer">
 
+        <InfoDialog infoDialog={this.state.infoDialog}
+                    handleClose={this.handleClose}/>
+
         <Card id="graphContent">
           <CardContent>
 
-            <div id="graphInfoIcon">
-              <IconButton >
-                <Info/>
-              </IconButton>
-            </div>
+
 
             <div className="graphChart">
-                <Chart/>   
-              </div>
+                <Chart chartRange={this.state.chartRange}/>   
+            </div>
 
             <CardActions>
 
@@ -179,6 +204,12 @@ toggleDrawer = (side, open) => () => {
                   />
                 }
                 />
+
+              <div id="graphInfoIcon">
+                <IconButton  onClick={this.handleInfoOpen}>
+                  <Info/>
+                </IconButton>
+              </div>
             </CardActions>
 
               
