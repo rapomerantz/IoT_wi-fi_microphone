@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
 import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
 
 
 const mapStateToProps = state => ({
@@ -65,36 +66,48 @@ class LoginPage extends Component {
       <div>
         { this.renderAlert() }
         <form onSubmit={this.login}>
-          <h1>Login</h1>
-          <div>
+          <h1>Is It Loud In Here?</h1>
+          <h2>Login</h2>
+          <div className="loginTextField">
             <label htmlFor="username">
-              Username:
-              <input
+              <TextField
                 type="text"
                 name="username"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
+                label="Username"
+                
               />
             </label>
           </div>
-          <div>
+          <div className="loginTextField">
             <label htmlFor="password">
-              Password:
-              <input
+              <TextField
                 type="password"
                 name="password"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
+                label="Password"
               />
             </label>
           </div>
           <div>
-            <input
-              type="submit"
-              name="submit"
-              value="Log In"
-            />
-            <Link to="/register">Register</Link>
+            <div className="loginButton" >
+              <Button type="submit" 
+                      name="submit" 
+                      value="Log In"
+                      fullWidth={true}
+                      >
+                      Submit
+              </Button>
+            </div>
+            <div className="loginButton">
+              <Button component={Link} 
+                      to="/register"
+                      fullWidth={true}>
+                Register
+              </Button>
+            </div>
           </div>
         </form>
       </div>
