@@ -112,7 +112,7 @@ router.put('/toggleActive', (req, res) => {
 // });
 
 
-let job; 
+let cronJobsObject = {}; 
 
 //START / STOP cronjob
 router.post('/toggleCron', (req, res) => {
@@ -121,16 +121,17 @@ router.post('/toggleCron', (req, res) => {
     let authToken = req.body.auth_token
     if (req.body.active === true) {
         console.log('turning on a new JOB');
-        //
+
+//this function redefines global variable `job` as a new CronJob with selected devices' credentials
+//this CronJob will be stopped if the device's `select` boolean = false 
 
         function startNewCron (deviceId, authToken) {
-            job = new CronJob({
+            cronJobsObject[deviceId] = new CronJob({
                 cronTime: '*/1 * * * * *',
                 onTick: function () {
                     axios.get(`https://api.spark.io/v1/devices/${deviceId}/audioSpl?access_token=${authToken}`)
                     .then((response) => {
                         let timestamp = moment().format();
-                        let deviceId = response.data.coreInfo.deviceID;
                         let splResult = response.data.result
                         console.log('Current SPL: ',response.data.result);
                 
@@ -159,16 +160,20 @@ router.post('/toggleCron', (req, res) => {
                 timeZone: 'America/Los_Angeles'
             });
         }
+
+        
+//call CronJob
         startNewCron(deviceId, authToken)
+        
 
-
-
-        job.start(); 
+//start CronJob
+        cronJobsObject[deviceId].start(); 
+        console.log('cronJobsObject:', cronJobsObject);
         res.sendStatus(200); 
     }
     else if (req.body.active === false) {
-        console.log('turning OFF job');
-        job.stop(); 
+        console.log('turning OFF job', deviceId);
+        cronJobsObject[deviceId].stop(); 
         res.sendStatus(200); 
     }
 })
