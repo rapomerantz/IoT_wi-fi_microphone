@@ -1,17 +1,31 @@
 #graphContainer {
     margin-bottom: 40px; 
+    font-family: 'Roboto Mono', monospace;
+    background-color: #b6edff;
 }
+
+
 #graphContent {
-    height: 80%;
-    width: 100%; 
+    background-color: rgb(252, 248, 248);
+    /* background-color: white;  */
+    border: 1px solid rgba(128, 128, 128, 0.207); 
+    width: 90%;
+    height: 440px;
+    margin: 20px auto;
+    padding: 5px;
+    border-radius: 20px;
     
 }
 
-.graphWire {
-    /* background-color: whitesmoke; 
-    border: 1px grey solid; 
-    height: 400px; */
-    /* margin-left: 75px; */
+.graphChart {
+    /* background-color: rgb(252, 248, 248);
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.207); 
+    width: 70%;
+    height: 400px;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 20px; */
 }
 
 .warningWire {

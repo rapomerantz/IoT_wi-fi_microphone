@@ -17,7 +17,7 @@ render() {
   let splReducer = this.props.state.splReducer.reverse();
 
   let splStampMap = splReducer.map((item) => {
-      let formatedStamp = moment(item.stamp).format('h:mm:ss');
+      let formatedStamp = moment(item.stamp).format('mm:ss');
       return formatedStamp;   
   })
   let splDataMap = splReducer.map((item) => {
@@ -47,8 +47,8 @@ let chartOptions = {
         scaleOverride: true, 
         scaleStartValue: 55, 
         scaleStepWidth: 2, 
-        scaleSteps: 15,
-        bezierCurve : false,
+        scaleSteps: 10,
+        bezierCurve : true,
         pointDot : true,
         pointDotStrokeWidth : 0.5,
         datasetFill : false,
@@ -56,7 +56,7 @@ let chartOptions = {
   
 
   return (
-      <LineChart data={chartData} options={chartOptions} height="450"/>            
+      <LineChart data={chartData} options={chartOptions} height="350" width="250"/>            
   );
 }
 }
