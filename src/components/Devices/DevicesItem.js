@@ -27,10 +27,11 @@ class DevicesItem extends Component {
       expanded: false,
       deleteDialog: false,
       editDialog: false,
-      activeSampling: false,
+      activeSampling: this.props.device.active,
     };
 
 handleActiveButton = () => {
+  console.log('active button');
   this.setState({
     activeSampling: !this.state.activeSampling
   })
