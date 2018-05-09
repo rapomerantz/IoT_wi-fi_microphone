@@ -1,12 +1,21 @@
+
+
+//Hello!
+//If you're seeing this, the cronJob function has moved to routes/devices.router.js
+//Have a lovely day :) 
+
+
+
+
+
+
+
 // const express = require('express');
 // const pool = require('./pool');
 // const CronJob = require('cron').CronJob;
 // const axios = require('axios');
 // const moment = require('moment');
 
-
-
-// //Currently my device's info is hardcoded into the API query - this will be changed before the project is done :) 
 
 
 // // Every 1 seconds makes an axios call to Photon
