@@ -128,7 +128,7 @@ router.post('/toggleCron', rejectUnauthenticated, (req, res) => {
                     .then((response) => {
                         let timestamp = moment().format();
                         let splResult = response.data.result
-                        console.log('Current SPL: ',response.data.result);
+                        console.log('Current SPL: ',deviceId ,response.data.result);
                 
                     //remove outlier data 
                         if (splResult < 30) {
@@ -142,7 +142,7 @@ router.post('/toggleCron', rejectUnauthenticated, (req, res) => {
                                     VALUES ('${deviceId}', '${splResult}', '${timestamp}');`
                         pool.query(queryText)
                             .then((result) => {
-                                console.log('successful post to db');
+                                // console.log('successful post to db');
                             }) 
                             .catch((err) => {
                                 console.log('error in post to db', err);

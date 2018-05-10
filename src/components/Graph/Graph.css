@@ -56,3 +56,10 @@
     background-repeat: no-repeat;
     background-position: 80% 50%;
   }
+
+
+
+#headerDeviceName {
+    margin: 0px; 
+    padding: 0px; 
+}

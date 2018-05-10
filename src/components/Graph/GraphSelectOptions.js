@@ -9,10 +9,10 @@ class GraphSelectOptions extends Component {
 
 render() {
 
-  return (
-    <option value={this.props.element.device_id}>{this.props.element.device_name}</option>
-  );
-}
+    return (
+      <option value={this.props.element.device_id}>{this.props.element.device_name}</option>
+    );
+  }
 }
 
 // this allows us to use <App /> in index.js

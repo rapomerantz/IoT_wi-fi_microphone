@@ -69,9 +69,9 @@ console.log('chart chartRange', chartRange);
 
 let chartOptions = {
         scaleOverride: true, 
-        scaleStartValue: scaleStart, 
+        scaleStartValue: 40, 
         scaleStepWidth: 2, 
-        scaleSteps: scaleSteps,
+        scaleSteps: 20,
         bezierCurve : true,
         pointDot : true,
         pointDotStrokeWidth : 0.5,
@@ -80,7 +80,7 @@ let chartOptions = {
   
 
   return (
-      <LineChart data={chartData} options={chartOptions} height="370" width="250"/>            
+      <LineChart data={chartData} options={chartOptions} height="340" width="250"/>            
   );
 }
 }

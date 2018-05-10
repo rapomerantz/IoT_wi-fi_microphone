@@ -31,8 +31,9 @@ class Graph extends Component {
       this.timer = null;
       this.state = {
         selectedDevice: '3a0027001647343339383037',
+        selectedDeviceName: 'OG Particle',
         timeSelection: 12,
-        switch: false,
+        switch: true,
         top: false,
         infoDialog: false,
         chartRange: 'low',
@@ -45,6 +46,7 @@ class Graph extends Component {
     this.fetchDevices();
     this.fetchSpl(); 
     this.timer = setInterval(this.tick, 500);  //<-- setting interval for reset timer (.5 seconds)
+    this.fetchDevices(); 
   }
 //check user - boot unauthorized user
   componentDidUpdate() {
@@ -97,7 +99,7 @@ handleTimeSelect = (event) => {
 handleDeviceSelect = (event) => {
   console.log('select value: ',event.target.value);
   this.setState({
-    selectedDevice: event.target.value
+    selectedDevice: event.target.value,
   });    
   this.fetchSpl(); 
 }
@@ -166,14 +168,13 @@ handleClose = () => {
           {selectOptions}
         </select>
 
-        <select onChange={this.handleRangeSelect} className="graphSelect">
+        {/* <select onChange={this.handleRangeSelect} className="graphSelect">
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
-        </select>
+        </select> */}
 
     </Card>
-
   )
 
     return (
@@ -185,6 +186,7 @@ handleClose = () => {
         <Card id="graphContent">
           <CardContent>
 
+              <h3 id="headerDeviceName">{this.state.selectedDeviceName}</h3>
 
 
             <div className="graphChart">
