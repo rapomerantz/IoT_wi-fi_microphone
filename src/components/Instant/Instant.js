@@ -107,6 +107,13 @@ tick = () => {
     })
   }
 
+  // filterSelected = () => {
+  //   console.log('filterSeleted');
+  //   let selectedDeviceArray = this.props.state.devicesReducer.devicesReducer && this.props.state.devicesReducer.devicesReducer; 
+  //   console.log('selected devices array :', selectedDevicesArray);
+  // }
+
+
   render() {
 
 //looping through devices & returning <option> elemnts to populate <select>
@@ -119,6 +126,14 @@ tick = () => {
 //Defining newSpl upon render
     let newSpl = this.props.state.splReducer[0] && //<-- 'does this value exist?'
                   this.props.state.splReducer[0].spl; //<-- 'if yes, this is the value of newSpl'
+
+//figuring out which device is currently selected
+    let selectedDeviceArray = this.props.state.devicesReducer.devicesReducer && this.props.state.devicesReducer.devicesReducer;
+    let selectedDevice = selectedDeviceArray.filter(device => {
+      return device.selected === true
+    })
+    console.log('selectedDevice', selectedDevice);
+    
 
     return (
         <div id="instantContainer">

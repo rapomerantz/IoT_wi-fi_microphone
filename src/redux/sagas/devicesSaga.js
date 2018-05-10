@@ -8,6 +8,7 @@ function* devicesSaga() {
     yield takeEvery ('DELETE_DEVICE', deleteDeviceSaga); 
     yield takeEvery ('EDIT_DEVICE', editDeviceSaga); 
     yield takeEvery ('TOGGLE_ACTIVE', activateDeviceSaga); 
+    yield takeEvery ('TOGGLE_SELECTED', toggleSelectedSaga)
 }
 
 
@@ -59,6 +60,16 @@ function* activateDeviceSaga(action) {
         }
     } catch (error) {
         console.log('error in activateDeviceSaga', error);           
+    }
+}
+
+function* toggleSelectedSaga(action) {
+    console.log('in toggleSelectedSaga');
+    try {
+        yield call (axios.put, '/api/devices/toggleSelected', action.payload)
+        yield put ({type: 'FETCH_DEVICES'}) //<-- triggers GET in fetchDevicesSaga above to repopulate devices
+    } catch (error) {
+        console.log('error in toggleSelectedSaga', error); 
     }
 }
 

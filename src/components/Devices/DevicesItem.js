@@ -28,6 +28,7 @@ class DevicesItem extends Component {
       deleteDialog: false,
       editDialog: false,
       activeSampling: this.props.device.active,
+      deviceSelected: false
     };
 
 handleActiveButton = () => {
@@ -37,6 +38,17 @@ handleActiveButton = () => {
   })
   this.props.dispatch({
     type: 'TOGGLE_ACTIVE', 
+    payload: this.props.device,
+  })
+}
+
+handleSelectedButton = () => {
+  console.log('SELECTED button');
+  this.setState({
+    deviceSelected: !this.state.deviceSelected
+  })
+  this.props.dispatch({
+    type: 'TOGGLE_SELECTED', 
     payload: this.props.device,
   })
 }
@@ -117,6 +129,13 @@ handleClose = () => {
               {/* collapse content: more device info */}
               <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                   <CardContent className={activeClassName}>
+
+                {/* Selected Button */}
+                    <Button onClick={this.handleSelectedButton} 
+                            variant="raised" 
+                            color="primary" >
+                            Select
+                    </Button>
 
                 {/* Activate Button */}
                     <Button onClick={this.handleActiveButton} 

@@ -29,11 +29,16 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     let body = req.body;
     let user = req.user
     console.log('/api/devices POST', req.body);
-    const queryText = `INSERT INTO person_device (person_id, device_id, auth_token, device_name) VALUES ($1, $2, $3, $4)`
-    pool.query(queryText, [user.id, body.deviceId, body.authToken, body.deviceName])
+    const firstQueryText = `UPDATE person_device SET selected = NULL;    `
+    const secondQueryText = `INSERT INTO person_device (person_id, device_id, auth_token, device_name) VALUES ($1, $2, $3, $4)`
+
+    pool.query(firstQueryText) // <-- set all devices selected to NULL
     .then((result) => {
-        console.log('successful POST /api/devices');
-        res.sendStatus(201); 
+        pool.query(secondQueryText, [user.id, body.deviceId, body.authToken, body.deviceName]) //<-- create new device
+        .then((result) => {
+            console.log('successful POST /api/devices');
+            res.sendStatus(201); 
+        })
     })
     .catch((err) => {
         console.log('ERR in POST /api/devices', err);
@@ -75,6 +80,29 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     })
 })
 
+//PUT toggle device that is SELECTED
+router.put('/toggleSelected', rejectUnauthenticated, (req, res) => {
+    console.log('in /api/devices/toggleSelected', req.body);
+    const firstQueryText = `UPDATE person_device SET selected = NULL;    `
+    const secondQueryText = `UPDATE person_device 
+                            SET selected = true 
+                            WHERE device_id = $1;`;
+
+    pool.query(firstQueryText) // <-- set all devices selected to NULL
+    .then((result) => {
+        pool.query(secondQueryText, [req.body.device_id]) //<-- set device selected to TRUE by device_id 
+        .then((result) => {
+            console.log('successful PUT /api/devices/toggleSlected');
+            res.sendStatus(201); 
+        })
+    })
+    .catch((err) => {
+        console.log('ERR in POST /api/devices/toggleSlected', err);
+        res.sendStatus(500); 
+    })
+    
+})
+
 
 //PUT to toggle activate sampling
 router.put('/toggleActive', rejectUnauthenticated, (req, res) => {
@@ -93,7 +121,6 @@ router.put('/toggleActive', rejectUnauthenticated, (req, res) => {
         })
         .catch((err) => {
             console.log('err in checkActiveQuery: ', err);
-            
         })
     })
     .catch((err)=> {
