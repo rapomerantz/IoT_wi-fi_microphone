@@ -1,4 +1,4 @@
-# Is It Loud In Here? (Work In Progress)
+# Is It Loud In Here?
 
 Hearing damage can be truly devestating but it’s difficult to know, quantifiably, just how loud your surroundings are at any given moment. “Is It Loud In Here?” is a combined web-app/Internet of Things (IoT) solution that allows the user to use wi-fi connected microphones to monitor the ambient volume in a space instantaneously and track the ambient volume over time. 
 
@@ -15,8 +15,8 @@ Hearing damage can be truly devestating but it’s difficult to know, quantifiab
 - Passport
 
 ## Screenshots: 
-This is a work in progress, screens will benefit from  additional styling and are subject to change
 
+<img src="documentation/images/appDemo_May_14_2018.gif" width ="250" alt=".gif of basic functionality">
 <img src="documentation/images/microphone.JPG" width ="250" alt="The Device">
 <img src="documentation/images/device_view.png" width ="250" alt="Devices Screen">
 <img src="documentation/images/instant_view.png" width ="250" alt="Instant View">
