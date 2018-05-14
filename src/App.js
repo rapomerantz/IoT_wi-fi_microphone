@@ -9,7 +9,7 @@ import {
 //login&static views
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
-import UserPage from './components/UserPage/UserPage';
+// import UserPage from './components/UserPage/UserPage';
 import Nav from './components/Nav/Nav';
 
 
@@ -36,10 +36,10 @@ const App = () => (
             path="/register"
             component={RegisterPage}
           />
-          <Route
+          {/* <Route
             path="/user"
             component={UserPage}
-          />
+          /> */}
           <Route
             path="/info"
             component={Info}
