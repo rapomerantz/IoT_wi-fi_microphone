@@ -31,7 +31,7 @@ class Graph extends Component {
       this.timer = null;
       this.state = {
         selectedDevice: '3a0027001647343339383037',
-        selectedDeviceName: 'OG Particle',
+        selectedDeviceName: 'Lunchroom',
         timeSelection: 12,
         switch: true,
         top: false,
@@ -159,8 +159,8 @@ handleClose = () => {
           <option value="12">1 Minute</option>
           <option value="24">2 Minutes</option>
           <option value="60">5 Minutes</option>
-          <option value="120">10 Minutes</option>
-          <option value="720">1 Hour</option>
+          {/* <option value="120">10 Minutes</option>
+          <option value="720">1 Hour</option> */}
         </select>
       
   {/* Select device */}
@@ -186,7 +186,7 @@ handleClose = () => {
         <Card id="graphContent">
           <CardContent>
 
-              <h3 id="headerDeviceName">{this.state.selectedDeviceName}</h3>
+              {/* <h3 id="headerDeviceName">{this.state.selectedDeviceName}</h3> */}
 
 
             <div className="graphChart">

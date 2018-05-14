@@ -7,15 +7,15 @@ render() {
 //Changing color/contents of warning <div> based on most recent SPL data
     let warningClassName = '';
     let warningMessage = '';
-    if (this.props.newSpl <= 75) {
+    if (this.props.newSpl <= 65) {
       warningClassName = 'warningGreen';
       warningMessage = 'No risk.'; 
     }
-    else if(this.props.newSpl > 75 && this.props.newSpl < 90) {
+    else if(this.props.newSpl > 65 && this.props.newSpl < 75) {
       warningClassName = 'warningYellow';
       warningMessage = 'Moderate risk.'
     }
-    else if (this.props.newSpl >= 90) {
+    else if (this.props.newSpl >= 75) {
       warningClassName = 'warningRed';
       warningMessage = 'High risk.'
     }
