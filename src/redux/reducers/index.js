@@ -8,7 +8,7 @@ const store = combineReducers({
   user,
   login,
   devicesReducer,
-  splReducer
+  splReducer,
 });
 
 export default store;
