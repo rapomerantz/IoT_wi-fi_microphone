@@ -107,7 +107,6 @@ router.put('/toggleActive', rejectUnauthenticated, (req, res) => {
 //this object will hold all cronjobs as they're created {deviceId: new cronJob}
 let cronJobsObject = {}; 
 
-
 //CREATE or STOP cronjob
 router.post('/toggleCron', rejectUnauthenticated, (req, res) => {
     console.log('in /api/devices/toggleCron, active? :', req.body.active);
@@ -117,7 +116,6 @@ router.post('/toggleCron', rejectUnauthenticated, (req, res) => {
 //if device is active, start new cron job. if it's inactive, end cronjob
     if (req.body.active === true) {
         console.log('turning on a new JOB');
-
 
 // when called this function creates a new key/value pair in cronJobsObject
         function createNewCronJob (deviceId, authToken) {
