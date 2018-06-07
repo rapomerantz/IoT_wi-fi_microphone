@@ -21,13 +21,14 @@ Hearing damage can be truly devestating but it’s difficult to know, quantifiab
 <img src="documentation/images/device_view.png" width ="250" alt="Devices Screen">
 <img src="documentation/images/instant_view.png" width ="250" alt="Instant View">
 <img src="documentation/images/graph_view.png" width ="250" alt="Graph View">
+<img src="documentation/images/photonSplSchematic.jpg" width ="300" alt="Graph View">
 
 ## Getting Started: 
 
 Required: 
 - Node.js
 - Postico and PostgreSQL
-- Particle Photon core flashed with custom code + wired to external microphone (to be included) 
+- Particle Photon core flashed with custom code (photonSplAudioCode.ino) + wired to external microphone (see photonSplSchematic.jpg) 
 
 To Run: 
 - npm install
